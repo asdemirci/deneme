@@ -14,3 +14,36 @@ OpenVPN açık kod yazılımı olarak gerçekleştirilmiş bir VPN yazılımıd�
 
 OpenVPN’i kurduğunuz ve çalıştırdığınız anda sisteminize tuno adında bir ağ arabirimi eklenir. Tuno sanal bir ağ arabirimidir. Bu ara birim üzerinden gönderilen paketler şifrelenir ve kullanılmakta olan gerçek ağ arabirimlerine yönlendirilir. OpenVPN OSI 2.ve 3. Katmanlarında çalışır ve paketleri bu katmanlardayken şifreleyebilir. OpenVPN kurulumu sunucu-istemci ya da noktadan noktaya olmak üzere iki şekilde yapılabilir. İki cihaz arasında güvenli bağlantı kurulması isteniyorsa, noktadan noktaya tercih edilir. Sertifika kullanılmadan sadece noktadan noktaya bağlantıda sadece iki uçta kullanılan parola bilgisi ile iletişim sağlanabilir. Sunucu ve istemci modelinden ise birden fazla bilgisayarların sunucu ile bağlantısı gerçekleştirilir. İstemciler izin verildiği takdirde aralarında sunucu üzerinden iletişim sağlanır. Her istemci ve sunucu arasındaki bağlantılar yapılırken sertifika kontrolü yapılır. Sertifika kullanımı güvenliği arttırır.
 
+#Kali üzerine OPENVPN Kurulum
+
+Kali üzerine OPENVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğundan aşağıda bahsedilmiştir.
+
+1. İlk önce sistemi updateliyelim.
+```
+$ sudo apt-get update
+
+$ sudo apt-get upgrade
+```
+
+
+
+Not: Bundan sonra çalıştıracağımız tüm komutları root kullanıcısı olarak çalıştıralım.
+
+2. OpenVPN yazılımının gerek duyduğu paketler aşağıdaki komut ile kurulur.
+```
+$ sudo apt-get install openvpn easy-rsa
+```
+⋅⋅* Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list
+4. And another item.
+```python
+s = "Python syntax highlighting"
+print s
+```
+ 
+```
+No language indicated, so no syntax highlighting. 
+But let's throw in a <b>tag</b>.
+```
+
