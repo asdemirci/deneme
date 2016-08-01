@@ -79,9 +79,17 @@ export KEY_COUNTRY=”TR”
 export KEY_PROVINCE=” Network Defense”
 export KEY_CITY=”ANKARA”
 export KEY_ORG=” TOBB ETU”
-export KEY_EMAIL=ayseselcuk77@gmail.com
+export KEY_EMAIL=networkdefense@gmail.com
 export KEY_CN=”NetworkDefense”
 #x509 Subject Field
 export KEY_NAME= NetworkDefense”
 export KEY_OU=”NetworkDefense”
 ```
+* **Country Name:** Ülke bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+* **State or Province Name:** Bölge bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+**City:** Şehir bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+**Org Name:** Organizasyon ismi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+**Org Unit Name:** Ogranizasyon Birim adı, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+**Common Name:** Sunucu Hostname bilgisi (hakancakiroglu.com gibi)
+**Email Address:** E-mail adresi bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+Makinedeki openssl sürümüne göre /etc/openvpn/easy-rsa/ dizinindeki openssl yapılandırma dosyasına yine aynı dizinde openssl.cnf adıyla kısayol verilmelidir.
