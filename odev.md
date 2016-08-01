@@ -93,3 +93,18 @@ export KEY_OU=”NetworkDefense”
 * **Common Name:** Sunucu Hostname bilgisi (hakancakiroglu.com gibi)
 * **Email Address:** E-mail adresi bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
 * Makinedeki openssl sürümüne göre */etc/openvpn/easy-rsa/* dizinindeki openssl yapılandırma dosyasına yine aynı dizinde openssl.cnf adıyla kısayol verilmelidir.
+
+*5*
+Yukarıdaki alanlar doldurulduktan sonra aşağıdaki komutlar sırası ile çalıştırılır ve sertifika otoritesi oluşturma aşaması gerçekleştirilir. En son aşamada ise oluşturulan sertifikalarda ilgili dizinlere kopyalanır.
+```
+$ sudo su
+
+$ cd /etc/openvpn/easy-rsa
+
+$ source vars 
+
+$ ./clean-all
+
+$ ./build-ca
+```
+*build-ca* komutunu verdiğiniz zaman, vars dosyasında tanımladığımız değişkenlere uygun olarak ca anahtarları oluşturulacak ve çıktı aşağıdaki gibi olacaktır.
