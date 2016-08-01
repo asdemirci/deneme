@@ -7,9 +7,17 @@ source vars
 ./clean-all
 ./build-ca
 ./build-key-server testserver
+#openvpn --genkey --secret ta.key
+source vars
+./clean-all
 ./build-dh
 sudo cd keys
 sudo cp testserver.crt testserver.key ca.crt dh2048.pem /etc/openvpn
+# sudo scp testserver.crt testserver.key ca.crt dh2048.pem ta.key username@ipadresi:/home/username
+# ssh username@ipadresi
+# sudo apt-get install openvpn
+# 
+
 sudo cd ..
 source vars 
 ./build-key testclient
