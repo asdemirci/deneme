@@ -16,42 +16,41 @@ OpenVPN’i kurduğunuz ve çalıştırdığınız anda sisteminize tuno adında
 
 #Kali üzerine OpenVPN Kurulum
 
-Kali üzerine OpenVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğundan aşağıda bahsedilmiştir.
+Aşağıda Kali üzerine OpenVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğu bahsedilmiştir.
 
-*1.* İlk önce sistemi updateliyelim.
+*1.* İlk önce sistemin güncellemesi aşağıdaki komutlar yardımıyla yapılır.
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
-Not: Bundan sonra çalıştıracağımız tüm komutları root kullanıcısı olarak çalıştıralım.
+**Not:** Bundan sonra tüm komutlar root kullanıcısı olarak çalıştırılır.
 
-*2.* OpenVPN yazılımının gerek duyduğu paketler aşağıdaki komut ile kurulur.
+*2.* OpenVPN yazılımının kurulumunda gerekli paketler aşağıdaki komut ile kurulur.
 ```
 $ sudo apt-get install openvpn easy-rsa
 ```
-# Sertifikalı Bağlantı Kullanımı
+# Sertifikaların Gereksinimi ve Kullanım Adımları
 
-Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenilir olarak bağlanabilir. Trafiğin SSL ile şifreli olarak gönderilebilmesi içinde sertifikaya ihtiyaç duyulmaktadır.
+Sertifikalı bağlantılar sayesinde çok sayıda bilgisayar birbirine güvenilir olarak bağlanır. Sertifikaların kullanılmasının nedeni trafiğin SSL ile şifreli olarak gönderilebilmesi sağlamaktır.
 
 **Sertifikalı Bağlantı Çalışma Mekanızması:**
 
-* Her bir cihazın sertifikası tek bir **sertifika otoritesi (certificate authority-CA)** tarafından imzalanır. 
+* Her bilgisayarın sertifikası tek bir **sertifika otoritesi (certificate authority-CA)** tarafından imzalanır. 
 
-* Bağlantı kuracak cihazlar birbirlerine sertifikalarını gönderir.
+* Birbirleri ile iletişime girecek bilgisayarlar birbirlerine sertifikalarını gönderir.
 
-* Sertifikayı alan tarafk sertifika otoritesin bakar ve sertifikanın gerçek olup olmadığını anlar.
+* Sertifikayı alan taraf sertifika otoritesine bakar ve sertifikanın gerçekliğini ve güvenilirliğini kontrol eder..
 
-* Eğer sertifika gerçekse bundan sonra  gönderilen veriler bu sertifika kullanılarak şifrelenir.
+* Sertifikanın gerçekliği kanıtlandığında bundan sonra gerçekleşecek veri iletişimleri de aynı sertifika kullanılarak şifrelenir.
 
-* Şifrelenmiş verileri de sertifika sahibi yani özel anahtarı bulunan kişi açabilir.
+* Şifrelenmiş veriler, sertifika sahibi yani özel anahtarı bulunan kişi tarafından açılır.
 
 #Sertifikaların Oluşturulması ve  Sertifika ile Yetkilendirme
 
-Sertifika oluşturmak için kullanılacak dosyaları *"/etc/openvpn"* dizini altına taşıyalım.
 
- *2.* adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. 
+ *2.* adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandıktan sonra, sertifika oluşturmak için kullanılacak dosyaları *"/etc/openvpn"* dizini altına taşımak için aşağıdaki adımlar gerçekleştirilir. 
  
-Openvpn içerisinde sertifikaların kolaylıkla oluşturulabilmesi için bazı kodlar hazır olarak bulunmaktadır. Bu kodlar Ubuntu içerisinde */usr/share/doc/openvpn/examples/easy-rsa* ya da */usr/share/easy-rsa/* * dizininde bulunurlar.
+Openvpn içerisinde, sertifikaların kolaylıkla oluşturulabilmesi için bazı kodlar hazır olarak gelir. Bu kodlar Kali içerisinde */usr/share/easy-rsa/* * dizininde bulunur.
 
 *3.*
 ```
@@ -62,40 +61,45 @@ $ mkdir /etc/openvpn/easy-rsa/
 $ sudo cp -R /usr/share/easy-rsa/* /etc/openvpn/easy-rsa
 ```
 
-Root kullanıcısına geçilerek işlemler artık root yetkisi ile yapılır. */etc/openvpn/easy-rsa/* dizini oluşturulur ve */usr/share/easy-rsa/* dizininde bulunan içeriği oluşturduğumuz dizine kopyalarız. Dosyalar kopyalandıktan sonra *easy-rsa* dizinine gidiyoruz.
-Bu komutların çalışması esnasında aşağıdaki gibi hata alınırsa *easy-rsa* klasörünü içeren dosyalar sistemde bulunmamaktadır.
+İlk komutta root kullanıcısına geçilir ve işlemlerin root yetkisi ile yapılması sağlanır. 2. komutta */etc/openvpn/easy-rsa/* dizini oluşturulur ve 3. komutta */usr/share/easy-rsa/* dizininde bulunan içerik, oluşturulan dizine kopyalanır.
+
+Komutların çalışması sırasında aşağıdaki gibi bir hata alınırsa *easy-rsa* klasörünü içeren dosyalar program yüklenir eksik gelmiştir.
 
 *cannot stat `/usr/share/easy-rsa/`: No such file or directory*
 
-Böyle bir hata aldığınızda *easy-rsa* içeriklerini tekrardan indiriniz ve */etc/openvpn/* klasörü altına kopyalayınız.
+Böyle bir hata alındığında *easy-rsa* içerikleri tekrar indirilir ve */etc/openvpn/* klasörü altına kopyalanır.
 
 *4.*
 ```
 $ cd  ~/easy-rsa
 ```
-Bu dizin altında bulunan *vars* dosyasını bir metin düzenleyici ile açarız ve aşağıda bulunan parametrelere gerekli değişiklikleri yaparız. Sadece dosyanın sonunda yer alan ön tanımlı değerleri değiştirmek yeterli olacaktır. Sertifika oluşumunda içerisine gömülecek verilerin hızlı bir şekilde oluşturulabilmesi için kullanılan değerlerdir. İsterseniz her sertifika için farklı değerlerde girebilirsiniz. Değişiklik işleminiz bittikten sonra sayfayı kaydedin.
-Aşağıda görülen */etc/openvpn/easy-rsa/vars* dosyasındaki sertifika için gerekli bilgiler, örnekteki gibi düzenlenmelidir.
+Dosyalar kopyalandıktan sonra *easy-rsa* dizinine gidilir.Bu dizin altında yeralan *vars* dosyası bir metin düzenleyicisi ile açılır. Sertifika oluşturulurken yer alacak verilerin hızlı bir şekilde yaratılması için kullanılan değerler bu dosyada bulunur. Aşağıda bulunan parametreler istenirse dafaultda verilen hali ile kalabilir ya da istenilen değerler girilebilir. Örnek amaçlı bazı değerler verilmiştir. Sadece dosyanın sonunda yer alan ön tanımlı parametlerin değiştirilmesi yeterlidir. Her sertifika için farklı değerler girelebilir. Yapılan değişiklikler tamamlandıktan sonra sayfayı kaydedilir.
+
+Aşağıda görülen */etc/openvpn/easy-rsa/vars* dosyasındaki sertifika için gerekli bilgiler, örnekteki gibi düzenlenebilir.
+
 ```
 $nano /etc/openvpn/easy-rsa/vars
 
-export KEY_COUNTRY=”TR”
-export KEY_PROVINCE=” Network Defense”
-export KEY_CITY=”ANKARA”
-export KEY_ORG=” TOBB ETU”
+export KEY_COUNTRY="TR"
+export KEY_PROVINCE="Network Defense"
+export KEY_CITY="ANKARA"
+export KEY_ORG="TOBB ETU"
 export KEY_EMAIL=networkdefense@gmail.com
-export KEY_CN=”NetworkDefense”
+export KEY_CN="NetworkDefense"
 #x509 Subject Field
-export KEY_NAME= NetworkDefense”
-export KEY_OU=”NetworkDefense”
+export KEY_NAME="NetworkDefense"
+export KEY_OU="NetworkDefense"
 ```
-* **Country Name:** Ülke bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-* **State or Province Name:** Bölge bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-* **City:** Şehir bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-* **Org Name:** Organizasyon ismi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-* **Org Unit Name:** Ogranizasyon Birim adı, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-* **Common Name:** Sunucu Hostname bilgisi (hakancakiroglu.com gibi)
-* **Email Address:** E-mail adresi bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-* Makinedeki openssl sürümüne göre */etc/openvpn/easy-rsa/* dizinindeki openssl yapılandırma dosyasına yine aynı dizinde openssl.cnf adıyla kısayol verilmelidir.
+Doldurmak istemediğiniz kısımları enter'a basarak atlayabilirsiniz.
+
+* **Country Name:** Ülke bilgisi
+* **State or Province Name:** Bölge bilgisi
+* **City:** Şehir bilgisi
+* **Org Name:** Organizasyon ismi
+* **Org Unit Name:** Ogranizasyon Birim adı
+* **Common Name:** Sunucu Hostname bilgisi 
+* **Email Address:** E-mail adresi bilgisi
+
 
 *5.* Yukarıdaki alanlar doldurulduktan sonra aşağıdaki komutlar sırası ile çalıştırılır ve sertifika otoritesi oluşturma aşaması gerçekleştirilir. En son aşamada ise oluşturulan sertifikalarda ilgili dizinlere kopyalanır.
 ```
