@@ -1,4 +1,6 @@
 
+#!/bin/bash
+
 #server makinesinde yapılacaklar
 sudo apt-get update
 sudo apt-get upgrade
@@ -7,6 +9,7 @@ sudo mkdir /etc/openvpn/easy-rsa
 sudo cp -R /usr/share/openvpn/easy-rsa/* /etc/openvpn/easy-rsa
 sudo cd /etc/openvpn/easy-rsa
 sudo nano vars
+# vars dosyasında aşağıdaki parametreler isteğe bağlı olarak değiştirilebilir
 # export KEY_COUNTRY="TR"
 # export KEY_PROVINCE="Network Defense"
 # export KEY_CITY="ANKARA"
@@ -49,8 +52,8 @@ exit 0
 
 sudo /etc/init.d/openvpn restart 
 sudo openvpn /etc/openvpn/server.conf 
-#client makinasında yapılacaklar
 
+#client makinasında yapılacaklar
 sudo apt-get update
 sudo apt-get install openvpn
 sudo mkdir /etc/openvpn
@@ -58,6 +61,7 @@ sudo cd /etc/openvpn
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf client.conf
 sudo tar -cvf /etc/openvpn/clientsertifika.tar 
 sudo nano /etc/openvpnclient.conf
+
 # client.conf dosyasına veriler girilir
 sudo /etc/init.d/openvpn restart 
 sudo openvpn /etc/openvpn/client.conf
