@@ -460,7 +460,7 @@ $sudo openvpn ayarDosyasi.conf
 
 komutunu vererek başlatalım. Böylece programın üreteceği çıktılar direk olarak ekrana yazılacak, böylece log dosyalarını takip etmemiz gerekmeyecektir. Öncelikle sunucuyu etkin hale getirmemiz gerekiyor.
 ```
-$sudo openvpn sunucu.conf 
+$sudo openvpn server.conf 
 ```
 
 komutunu verdiğimizde sunucu ayarlamalarını yapacak, gerekli dosyaları okuyacak ve UDP 1194 potunu dinlemeye başlayacaktır. Kalabalık çıktıları okumaya çalışın. Eğer en sonda
@@ -473,7 +473,7 @@ yazısını görürseniz sorun yok demektir. Eğer bu satırı göremediyseniz, 
 
 Şimdi de istemci tarafına geçip buradaki dosyayı çalıştıralım:
 ```
-$sudo openvpn istemci1.conf 
+$sudo openvpn client.conf 
 ```
 
 Yine kalabalık olan çıktılar arasında aşağıdaki satırları görürseniz işlem tamamlanmış demektir.
@@ -503,7 +503,7 @@ bağlantıyı test edebilirsiniz. Aklınızda bulunsun, testin çalışabilmesi 
 
 Eğer aradaki bağlantıyı sorunsuz olarak kurabildiyseniz, çalıştığı ekranlarda Ctrl - C ile openVPN uygulamalarını kapatabilirsiniz. İsterseniz her bağlanma için komutları yukarıda tarif edilen şekilde verebilirsiniz. Fakat sunucu için bu pek uygun olmayacaktır. Sunucu tarafında bulunan server.conf dosyasını /etc/openvpn dizininin altına kopyalayalım. ca.crt, testserver.key, testserver.crt ve dh2048.pem  dosyalarını da /root/openvpn  dizinine kopyalayalım. İlgili dizin için de görünürlüğü kısıtlayalım. Yeri değişen dosyalar için conf dosyamızı ayarlayalım. openVPN'in yetkilerini düşürelim. Böylece güvenliğimizi artıralım. Sonra da sunucumuzu yeniden başlatalım.
 
-#OPENVPN SUNUCU FIREWALL (Ateş duvarı) ve ROUTING (Yönlendirme) KONFİGÜRASYONU
+#OPENVPN SUNUCU FIREWALL ve ROUTING KONFİGÜRASYONU
 
 Not: Openvpn sunucumuzda firewall çalışıyorsa;aşağıdaki komut ile firewall'da 1194 numaralı portu açmalıyız.
 ```
