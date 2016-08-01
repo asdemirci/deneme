@@ -32,7 +32,7 @@ $ sudo apt-get install openvpn easy-rsa
 
 Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenilir olarak bağlanabilir. Trafiğin SSL ile şifreli olarak gönderilebilmesi içinde sertifikaya ihtiyaç duyulmaktadır.
 **Sertifikalı Bağlantı Çalışma Mekanızması:**
-⋅⋅* Her bir cihazın sertifikası tek bir **sertifika otoritesi (certificate authority-CA)** tarafından imzalanır. 
+* Her bir cihazın sertifikası tek bir **sertifika otoritesi (certificate authority-CA)** tarafından imzalanır. 
 
 * Bağlantı kuracak cihazlar birbirlerine sertifikalarını gönderir.
 
@@ -41,3 +41,7 @@ Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenili
 * Eğer sertifika gerçekse bundan sonra  gönderilen veriler bu sertifika kullanılarak şifrelenir.
 
 * Şifrelenmiş verileri de sertifika sahibi yani özel anahtarı bulunan kişi açabilir.
+
+#Sertifikaların Oluşturulması ve  Sertifika ile Yetkilendirme
+... Sertifika oluşturmak için kullanılacak dosyaları /etc/openvpn dizini altına taşıyalım.
+2 adımda gerçekleştirilen openvpn ve easy-rsa paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. Openvpn içerisinde sertifikaların kolaylıkla oluşturulabilmesi için bazı kodlar hazır olarak bulunmaktadır. Bu kodlar Ubuntu içerisinde /usr/share/doc/openvpn/examples/easy-rsa ya da/usr/share/easy-rsa/* dizininde bulunurlar.
