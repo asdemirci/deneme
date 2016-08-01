@@ -231,6 +231,7 @@ Katman 3 bir tünel oluştur (dev tun).
 dev tun
 ```
 CA sertifikası ca.crt, sunucu sertifikan NetworkDefense.crt ve sunucu anahtarın NetworkDefense.key dosyasındadır.
+
 ```
 ca /etc/openvpn/easy-rsa/keys/ca.crt
 cert /etc/openvpn/easy-rsa/keys/server.crt
@@ -242,15 +243,16 @@ Diffie-Hellman için dh1024.pem dosyasını kullan.
 dh /etc/openvpn/easy-rsa/keys/dh2048.pem
 ```
 Ağdaki IP adreslerini 10.8.0.0 - 10.8.0.254 arasında dağıt kendine de 10.8.0.1 adresini al.
-## client ile server arasında kurulacak ağ’da kullanılacak IP blogu, ##
-## dilediğiniz şekilde subnetleyebilirsiniz ##
+client ile server arasında kurulacak ağ’da kullanılacak IP blogu, 
+dilediğiniz şekilde subnetleyebilirsiniz 
+
 ```
 server 10.8.0.0 255.255.255.0
 ```
 Ek olarak şu ayarları yapabilirsiniz:
 
-Sunucuya bağlanan bilgisayarların IP adreslerini korunması ve her seferinde aynı kalması için aşağıdaki komutu verebilirsiniz. ## eğer bazı clientlara hep aynı IP adresinin atanmasını istiyorsak, ##
-## gerekli bilgileri ipp.txt dosyasına yazıp, bu dosyayı da config dizine##
+Sunucuya bağlanan bilgisayarların IP adreslerini korunması ve her seferinde aynı kalması için aşağıdaki komutu verebilirsiniz. eğer bazı clientlara hep aynı IP adresinin atanmasını istiyorsak, 
+gerekli bilgileri ipp.txt dosyasına yazıp, bu dosyayı da config dizine
 
 ```
 İfconfig-pool-persist ipp.txt
@@ -263,7 +265,7 @@ client-to-client
 ```
 shaper n 
 ```
-## n değeri 100 bps ile 100 Mbps arasında olabilir. Ancak çok düşük hızlarda TCP protokolü kullanırsak geçikme sürekli artıyor ve connecion time out oluyor. Bunun çözümü ise MTU'u biraz düşürmektir. ##
+n değeri 100 bps ile 100 Mbps arasında olabilir. Ancak çok düşük hızlarda TCP protokolü kullanırsak geçikme sürekli artıyor ve connecion time out oluyor. Bunun çözümü ise MTU'u biraz düşürmektir. 
 İstemcilerin bütün İnternet trafiklerinin sunucu üzerinden olmasını istiyorsanız, sunucu ayarları içine komutunu koymanız gerekir. Bu durumda sunucu üzerinden İnternet'e çıkış ayarlarını da ayrıca yapmanız gerekir. "redirect-gateway" komutu bütün trafiği yönlendirdiği için DHCP adresi alamama gibi sorunlara da yol açabilmektedir.  push “redirect-gateway def1 bypass-dhcp” ifadesi ile clientların default gateway olarak OpenVPN sunucusunu kullanabileceklerni belirtiyoruz. Bu şekilde client tarafından üretilen tüm trafik tünel içerisinden geçerek OpenVPN üzerinden pass ediliyo
 ```
 push "redirect-gateway def1 bypass-dhcp"
@@ -318,7 +320,6 @@ log-append openvpn.log 
 client-config-dir client-configs
 ```
 
-
 Eğer her bir sertifika içine farklı bilgiler gömmek isterseniz pkitool komutlarını --interact parametresi ile çalıştırabilirsiniz.
 VPN'in IP adresleri ile yerel ağ bağlantılarının adreslerinin çakışmamasına (aynı alt ağda olmamasına) dikkat ediniz.
 IPv4 ve yönelnedirmeler hakkında biraz bilgi edinmeniz işinizi kolaylaştıracaktır.
@@ -334,6 +335,7 @@ $ sudo mv ca.crt iyiSunucu.crt iyiSunucu.key dh1024.pem /root/openvpn
 $ sudo /etc/init.d/openvpn restart
 ```
 #OpenVPN İSTEMCİ (Client) BAĞLANTI YAPILANDIRILMASI
+
 İstemciler için birçok yetkilendirme yöntemi kullanılabilmektedir. Burada sertifika tabanlı ve shell script tabanlı iki yöntem anlatılacaktır. Öncelikle istemciye OpenVPN kurulmalıdır. Ubuntu üzerinde openvpn kurulumu ve yapılandırma dosyasının oluşturulması için aşağıda komutlar uygulanmalıdır. Windows ve MAC için farklı istemci yazılımları da bulunmaktadır. Fakat yapılandırma dosyası içeriği tüm işletim sistemlerinde aynıdır.
 İstemci makinede aşağıdaki komutlar çalıştırılarak openvpn client kurulumu yapılmalıdır.
 ```
@@ -396,7 +398,6 @@ Bu şekilde istemci vpn sunucusuna bağlandığında 10.9.0.0 ağına dahil olac
 push "route 192.168.1.0 255.255.255.0"
 ```
 
-
 Server ve client kurulumu bitti. Yapmamız gereken işlem adımı port yönlendirmek. 
 Modemlerde wan 1194 udp portuna gelen istekleri içerideki VPN serverin statik ip adresine ve 1194 portuna yönlendireceksiniz. Airties vb modemlerde Nat menüsü altında port forwarding kısmından kolayca yapabilirsiniz. 
 
@@ -458,9 +459,9 @@ $sudo openvpn sunucu.conf
 
 komutunu verdiğimizde sunucu ayarlamalarını yapacak, gerekli dosyaları okuyacak ve UDP 1194 potunu dinlemeye başlayacaktır. Kalabalık çıktıları okumaya çalışın. Eğer en sonda
 
-
+```
 Initialization Sequence Completed
-
+```
 
 yazısını görürseniz sorun yok demektir. Eğer bu satırı göremediyseniz, dosyalarınızın yerlerini ve ayar dosyalarınızı tekrar kontrol edin. Kalabalık yazılar arasında sorunun nedeni yazacaktır.
 
@@ -522,7 +523,11 @@ Not:  Openvpn servisi sunucu başladığında otomatik çalışması için aşa�
 $ update-rc.d –f openvpn defaults 
 ```
 kaynaklar:
+
 [1] http://www.olympos.org/howto-nasil/openvpn/openvpn-ile-vpn-uygulamalari-20220.html
+
 [2] http://penguence.linux.org.tr/?~p=dergi&action=show&which=77
+
 [3] http://openvpn.net/index.php/documentation/howto.html
+
 http://www. linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
