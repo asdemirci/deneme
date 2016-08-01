@@ -87,9 +87,9 @@ export KEY_OU=”NetworkDefense”
 ```
 * **Country Name:** Ülke bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
 * **State or Province Name:** Bölge bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-**City:** Şehir bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-**Org Name:** Organizasyon ismi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-**Org Unit Name:** Ogranizasyon Birim adı, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-**Common Name:** Sunucu Hostname bilgisi (hakancakiroglu.com gibi)
-**Email Address:** E-mail adresi bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
-Makinedeki openssl sürümüne göre /etc/openvpn/easy-rsa/ dizinindeki openssl yapılandırma dosyasına yine aynı dizinde openssl.cnf adıyla kısayol verilmelidir.
+* **City:** Şehir bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+* **Org Name:** Organizasyon ismi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+* **Org Unit Name:** Ogranizasyon Birim adı, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+* **Common Name:** Sunucu Hostname bilgisi (hakancakiroglu.com gibi)
+* **Email Address:** E-mail adresi bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
+* Makinedeki openssl sürümüne göre */etc/openvpn/easy-rsa/* dizinindeki openssl yapılandırma dosyasına yine aynı dizinde openssl.cnf adıyla kısayol verilmelidir.
