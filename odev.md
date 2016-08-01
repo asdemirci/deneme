@@ -14,7 +14,7 @@ OpenVPN açık kod yazılımı olarak gerçekleştirilmiş bir VPN yazılımıd�
 
 OpenVPN’i kurduğunuz ve çalıştırdığınız anda sisteminize tun0 adında bir ağ arabirimi eklenir. Tun0 sanal bir ağ arabirimidir. Bu ara birim üzerinden gönderilen paketler şifrelenir ve kullanılmakta olan gerçek ağ arabirimlerine yönlendirilir. OpenVPN OSI 2.ve 3. Katmanlarında çalışır ve paketleri bu katmanlardayken şifreleyebilir. OpenVPN kurulumu sunucu-istemci ya da noktadan noktaya olmak üzere iki şekilde yapılabilir. İki cihaz arasında güvenli bağlantı kurulması isteniyorsa, noktadan noktaya tercih edilir. Sertifika kullanılmadan sadece noktadan noktaya bağlantıda sadece iki uçta kullanılan parola bilgisi ile iletişim sağlanabilir. Sunucu ve istemci modelinden ise birden fazla bilgisayarların sunucu ile bağlantısı gerçekleştirilir. İstemciler izin verildiği takdirde aralarında sunucu üzerinden iletişim sağlanır. Her istemci ve sunucu arasındaki bağlantılar yapılırken sertifika kontrolü yapılır. Sertifika kullanımı güvenliği arttırır.
 
-#Kali üzerine OpenVPN Kurulum
+#Kali üzerine OpenVPN Kurulumu
 
 Aşağıda Kali üzerine OpenVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğu bahsedilir.
 
@@ -233,15 +233,15 @@ dev tun
 * CA sertifikası *ca.crt*, server sertifikası *testserver.crt* ve server anahtarı *testserver.key* dosyalarıdır.
 
 ```
-ca /etc/openvpn/easy-rsa/keys/ca.crt
-cert /etc/openvpn/easy-rsa/keys/testserver.crt
-key /etc/openvpn/easy-rsa/keys/testserver.key 
+ca /etc/openvpn/ca.crt
+cert /etc/openvpn/testserver.crt
+key /etc/openvpn/testserver.key 
 ```
 * Diffie-Hellman için dh2048.pem dosyasının kullanılması için.
 ```
 dh /etc/openvpn/easy-rsa/keys/dh2048.pem
 ```
-*  Client ile server arasında kurulacak ağda kullanılacak IP blogu için, IP adresleri 10.8.0.0 - 10.8.0.254 arasında dağıtılır. Server kendine 10.8.0.1 adresini alır.
+*  Client ile server arasında kurulacak ağda kullanılacak IP blogu için, IP adresleri 10.8.0.0 - 10.8.0.254 arasında dağıtılır. Server 
 
 ```
 server 10.8.0.0 255.255.255.0
