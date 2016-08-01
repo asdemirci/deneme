@@ -178,3 +178,14 @@ sertifika ile yetkilendirme yapılacaksa aşağıdaki dosyaların istemciye kopy
 
 İlk olarak dosyaları bir grup haline getirelim,bunun için tar komutu kullanılabilir *"tar –cf istemcisertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/ testclient.crt
 /etc/openvpn/easy-rsa/keys/ testclient.key”* .istemcisertifika.tar dosyasını sftp yada scp ile istemci makineye gönderebiliriz.
+```
+/etc/openvpn/ca.crt
+/etc/openvpn/easy-rsa/keys/ testclient.crt
+/etc/openvpn/easy-rsa/keys/ testclient.key
+```
+NOT: Taşıma işleminden sonra testclient.crt ve testclient.key dosyalarını sunucudan kaldırmamız gerekmekte. Silme işlemi yerine uzantısını değiştirmemizde yeterli olacaktır.Aşağıdaki komutlar dosyaların uzantılarını değiştirecektir.
+```
+mv /etc/openvpn/easy-rsa/keys/ testclient.crt etc/openvpn/easy-rsa/keys/ testclient.crt_yedek
+mv /etc/openvpn/easy-rsa/keys/ testclient.key etc/openvpn/easy-rsa/keys/ testclient.key_yedek
+```
+
