@@ -473,12 +473,12 @@ $ sudo /sbin/iptables –A FORWARD –i eth0 –o tun0 –m state --state RELATE
 
 $ sudo /sbin/iptables –A FORWARD –i tun0 –o eth0 –j ACCEPT
 ```
-***Not:***  Openvpn servisi server başladığında otomatik çalışması için aşağıdaki komut kullanılmalıdır.
+***Not:***  Openvpn servisinin server başladığında otomatik çalışması için aşağıdaki komut kullanılmalıdır.
 ```
 $ update-rc.d –f openvpn defaults 
 ```
 #KAYNAKLAR
-[1] https://openvpn.net/index.php/open-source/documentation/howto.html
+[1]  https://openvpn.net/index.php/open-source/documentation/howto.html
 
 [2]  https://openvpn.net/index.php/open-source/articles.html
 
@@ -486,10 +486,10 @@ $ update-rc.d –f openvpn defaults
 
 [4]  http://fedoranews.org/contributors/florin_andrei/openvpn/
 
-[5] http://www.olympos.org/howto-nasil/openvpn/openvpn-ile-vpn-uygulamalari-20220.html
+[5]  http://www.olympos.org/howto-nasil/openvpn/openvpn-ile-vpn-uygulamalari-20220.html
 
-[6] http://penguence.linux.org.tr/?~p=dergi&action=show&which=77
+[6]  http://penguence.linux.org.tr/?~p=dergi&action=show&which=77
 
-[7] http://openvpn.net/index.php/documentation/howto.html
+[7]  http://openvpn.net/index.php/documentation/howto.html
 
 [8]. http://www.linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
