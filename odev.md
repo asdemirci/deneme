@@ -4,9 +4,9 @@
 
 **VPN(Virtual Private Network/Sanal Özel Ağ)** internet üzerinden şifreli ve güvenli olarak veri iletişimi sağlanılmasına ortam hazırlayan bir teknolojidir. Aynı zamanda IIS tarafından yasaklanan sitelere erişilmesini sağlar. 90‘ ların ortalarında internetin ucuzlaması ve yükselişi bu gibi yeni teknolojilerin önünü açtı. VPN sayesinde internet kullanılarak kurumsal ağların birbirine bağlanması daha düşük maliyetlerde gerçekleştirilmektedir. VPN sayesinde kurumsal ağlarda firewall arkasında çalışanlar güvenli bir iletişim ortamı elde etmişlerdir.
 
-İki tip VPN teknolojisi bulunmaktadır. Bunlar “Remote Access VPN” ve Site-to-site VPN” olarak geçer. Remote Access VPN’i, farklı lokasyonlardaki şubeleri merkeze bağlamak ya da farklı yerlerde bulunan çalışanları kurum ya da firma ağına istedikleri her yerden güvenli iletişim elde etmeleri için kullanırız.
+İki tip VPN teknolojisi bulunmaktadır. Bunlar *“Remote Access VPN”* ve *"Site-to-site VPN”* olarak geçer. *Remote Access VPN*’i, farklı lokasyonlardaki şubeleri merkeze bağlamak ya da farklı yerlerde bulunan çalışanları kurum ya da firma ağına istedikleri her yerden güvenli iletişim elde etmeleri için kullanırız.
 
-Site-to-site VPN ise farklı firmaların birbirleri ile güvenli iletişim kurmaları amacıyla oluşturulmuştur. Aynı zamanda Remote Access VPN de olduğu gibi kurum şubelerinin merkez ağa bağlanması sağlanır bu VPN yapısında iki tarafta VPN sunucu bulunur.
+*Site-to-site VPN* ise farklı firmaların birbirleri ile güvenli iletişim kurmaları amacıyla oluşturulmuştur. Aynı zamanda *Remote Access VPN* de olduğu gibi kurum şubelerinin merkez ağa bağlanması sağlanır bu VPN yapısında iki tarafta VPN sunucu bulunur.
 
 OpenVPN açık kod yazılımı olarak gerçekleştirilmiş bir VPN yazılımıdır. Birçok platformda çalışabilmektedir. GPL ile lisanslanmıştır. Sunucu ve istemci tarafı bulunmaktadır. SSL/TLS protokollerini kullanarak OSI 2. Ve 3. Katman seviyesinde şifreli ağ erişimi sağlar. Noktadan noktaya ya da köprü modu ile çalışabilmektedir. OpenSSL kütüphanesinin sağladığı şifreleme, yetkilendirme, sertifika oluşturma özelliklerinden faydalanırız. Aktif ve pasif saldırılara karşı güvenliği sağlamaktadır. Tüm güvenlik duvarları, vekil sunucular, nat üzerinden sorunsuz olarak tünelleme imkânı sağlar. İstenildiği takdirde GUI ile yönetim imkânı sağlar. Hem kolay kurulur hem de birçok işletim sistemi ile uyumlu olarak çalışan modüler bir yapısı bulunur. Tüm trafik LZO Kütüphanesi kullanılark gerçek zamanlı olarak sıkıştırılmaktadır. Kablosuz ağlar için güvenli erişim imkânı sağlar. Mobil ve gömülü sistemleri de desteklemektedir. Kısa süreli bağlantı kesilmelerinde ve IP değişimlerinde kullanılan uygulamaya bağlı olarak bağlantılar devam ettirilmektedir. Bağlantı sağlanabilmesi için güvenlik duvarında tek bir port’un açık olması yeterlidir. Scripting imkânlarıyla yüksek esneklik sağlanabilmektedir. OpenVPN SSL/TLS protokollerini kullandığı için Ipsec gibi işletim sisteminin çekirdeğinde temel değişiklikler gerektirmez.
 
@@ -14,9 +14,9 @@ OpenVPN açık kod yazılımı olarak gerçekleştirilmiş bir VPN yazılımıd�
 
 OpenVPN’i kurduğunuz ve çalıştırdığınız anda sisteminize tuno adında bir ağ arabirimi eklenir. Tuno sanal bir ağ arabirimidir. Bu ara birim üzerinden gönderilen paketler şifrelenir ve kullanılmakta olan gerçek ağ arabirimlerine yönlendirilir. OpenVPN OSI 2.ve 3. Katmanlarında çalışır ve paketleri bu katmanlardayken şifreleyebilir. OpenVPN kurulumu sunucu-istemci ya da noktadan noktaya olmak üzere iki şekilde yapılabilir. İki cihaz arasında güvenli bağlantı kurulması isteniyorsa, noktadan noktaya tercih edilir. Sertifika kullanılmadan sadece noktadan noktaya bağlantıda sadece iki uçta kullanılan parola bilgisi ile iletişim sağlanabilir. Sunucu ve istemci modelinden ise birden fazla bilgisayarların sunucu ile bağlantısı gerçekleştirilir. İstemciler izin verildiği takdirde aralarında sunucu üzerinden iletişim sağlanır. Her istemci ve sunucu arasındaki bağlantılar yapılırken sertifika kontrolü yapılır. Sertifika kullanımı güvenliği arttırır.
 
-#Kali üzerine OPENVPN Kurulum
+#Kali üzerine OpenVPN Kurulum
 
-Kali üzerine OPENVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğundan aşağıda bahsedilmiştir.
+Kali üzerine OpenVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğundan aşağıda bahsedilmiştir.
 
 *1.* İlk önce sistemi updateliyelim.
 ```
@@ -47,7 +47,7 @@ Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenili
 
 #Sertifikaların Oluşturulması ve  Sertifika ile Yetkilendirme
 
-Sertifika oluşturmak için kullanılacak dosyaları */etc/openvpn* dizini altına taşıyalım.
+Sertifika oluşturmak için kullanılacak dosyaları *"/etc/openvpn"* dizini altına taşıyalım.
 
  *2.* adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. 
  
@@ -109,11 +109,11 @@ $ ./clean-all
 
 $ ./build-ca
 ```
-*build-ca* komutunu verdiğiniz zaman, *vars* dosyasında tanımladığımız değişkenlere uygun olarak ca anahtarları oluşturulacak ve çıktı aşağıdaki gibi olacaktır.
+*build-ca* komutunu verdiğiniz zaman, *vars* dosyasında tanımladığımız değişkenlere uygun olarak *ca anahtarları* oluşturulacak ve çıktı aşağıdaki gibi olacaktır.
 
 **RESIM EKLE**
 
-#SUNUCU (Server) SERTİFİKASI HAZIRLAMA
+#Sunucu(Server) Sertifikası Hazırlama
 
 Sertifika otoritresini yapılandırdıktan sonra, *OpenVPN sunucusuna* ait anahtarları oluşturuyoruz.
 
@@ -138,7 +138,7 @@ $ sudo cp testserver.crt testserver.key ca.crt dh2048.pem  /etc/openvpn
 ```
 *6.* Sonra, anahtar değiş tokuşu için kullanılacak *Diffie Hellman dosyasını* oluşturuyoruz.
 
-*Vars* dosyasını değiştirmediğimiz için anahtar dizini *~/easy-rsa/key* dizini olacaktır. Bundan sonra oluşturulacak anahtar ve sertifika dosyaları bu dizin altında bulunacaktır. *.key* uzantılı dosyalar gizli dosyalardır ve özel anahtarı içerirler. *.crt* uzantılı dosyalar ise dağıtılabilir.
+*Vars* dosyasını değiştirmediğimiz için anahtar dizini *~/easy-rsa/key* dizini olacaktır. Bundan sonra oluşturulacak anahtar ve sertifika dosyaları bu dizin altında bulunacaktır. *".key"* uzantılı dosyalar gizli dosyalardır ve özel anahtarı içerirler. *".crt"* uzantılı dosyalar ise dağıtılabilir.
 
 ```
 $ ./build-dh
@@ -154,9 +154,9 @@ Verdiğimiz komutları açıklayayım:
 4. testclient istemcisi için gerekli sertifika/anahtar çiftini oluşturur.
 ```
 
-#İSTEMCİ (Client) SERTİFİKASI HAZIRLAMA
+#İstemci (Client) Sertifikası Hazırlama
 
-Öncelikle server üzerinde client için sertifikaların oluşturulması gerekiyor. Crt,key,pem dosyalarını *"/etc/openvpn/"* pathine kopyaladıktan sonra  client sertifikası hazırlamamız gerekmekte.
+Öncelikle server üzerinde client için sertifikaların oluşturulması gerekiyor. Crt, key, pem dosyalarını *"/etc/openvpn/"* pathine kopyaladıktan sonra  client sertifikası hazırlamamız gerekmekte.
 ```
 $ cd /etc/openvpn/easy-rsa
 
@@ -166,8 +166,8 @@ $ ./build-key  testclient
 ```
 Böylece, CA, server ve client için sertifika/anahtarı oluşturmuş olduk. Bundan sonra her hangi bir client için sertifika/anahtar üretmek için yukarıdaki komut kullanılır. 
 
-Bu komut ile yine “keys” klasörü içinde testclient.crt ve testclient.key isimli dosyalar oluşuyor. 
-Dikkat edilmesi gereken oluşturma işlemi sırasında keys dizini altında ca.keys ve ca.crt dosyalarının bulunmasıdır. Bütünlüğü bozmamak ve dosyaların taşınarak güvenliklerinin tehlikeye atılmaması için bütün oluşturma işlemlerinin tek bir bilgisayar üzerinde yapılması tavsiye edilir.
+Bu komut ile yine *“keys”* klasörü içinde *testclient.crt* ve *testclient.key* isimli dosyalar oluşuyor. 
+Dikkat edilmesi gereken oluşturma işlemi sırasında keys dizini altında *ca.keys* ve *ca.crt* dosyalarının bulunmasıdır. Bütünlüğü bozmamak ve dosyaların taşınarak güvenliklerinin tehlikeye atılmaması için bütün oluşturma işlemlerinin tek bir bilgisayar üzerinde yapılması tavsiye edilir.
 
 Bu iki dosyayı ve ilk başta oluşturduğumuz ca.crt dosyasını, uzak lokasyonda bulunan client pc’nin config klasörü içine kopyalamamız gerekiyor. Zip’leyip mail ile gönderebilirsiniz. Aynı yöntemle birden fazla değişik isimlerde client oluşturabilirsiniz bunu unutmayın.
 
@@ -178,7 +178,7 @@ sertifika ile yetkilendirme yapılacaksa aşağıdaki dosyaların istemciye kopy
 3. /etc/openvpn/easy-rsa/keys/testclient.key
 ```
 
-İlk olarak dosyaları bir grup haline getirelim,bunun için tar komutu kullanılabilir *"tar –cf istemcisertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/testclient.crt
+İlk olarak dosyaları bir grup haline getirelim,bunun için tar komutu kullanılabilir *"tar –cf clientsertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/testclient.crt
 /etc/openvpn/easy-rsa/keys/testclient.key”* .clientsertifika.tar dosyasını sftp yada scp ile client makineye gönderebiliriz.
 
 **NOT:** Taşıma işleminden sonra *testclient.crt* ve *testclient.key* dosyalarını sunucudan kaldırmamız gerekmekte. Silme işlemi yerine uzantısını değiştirmemizde yeterli olacaktır.Aşağıdaki komutlar dosyaların uzantılarını değiştirecektir.
@@ -223,25 +223,23 @@ $nano /etc/openvpn/server.conf
 port 1194
 proto udp
 ```
-* Katman 3 bir tünel oluştur (dev tun).
-* oluşturulan sanal ağ bağdaştıcısının tip routedd vpn yapacağımız için tun diyoruz
+* Katman 3 bir tünel oluştur (dev tun). Oluşturulan sanal ağ bağdaştıcısının tip routedd vpn yapacağımız için tun diyoruz
 ```
 dev tun
 ```
-* CA sertifikası ca.crt, sunucu sertifikan testserver.crt ve sunucu anahtarın testserver.key dosyasındadır.
+* CA sertifikası *ca.crt*, sunucu sertifikan *testserver.crt* ve sunucu anahtarın *testserver.key* dosyasındadır.
 
 ```
 ca /etc/openvpn/easy-rsa/keys/ca.crt
 cert /etc/openvpn/easy-rsa/keys/testserver.crt
 key /etc/openvpn/easy-rsa/keys/testserver.key 
 ```
-* Diffie-Hellman için dh1024.pem dosyasını kullan.
+* Diffie-Hellman için dh2048.pem dosyasını kullan.
 
 ```
 dh /etc/openvpn/easy-rsa/keys/dh2048.pem
 ```
-* Ağdaki IP adreslerini 10.8.0.0 - 10.8.0.254 arasında dağıt kendine de 10.8.0.1 adresini al.
-* client ile server arasında kurulacak ağ’da kullanılacak IP blogu, dilediğiniz şekilde subnetleyebilirsiniz 
+* Ağdaki IP adreslerini 10.8.0.0 - 10.8.0.254 arasında dağıt kendine de 10.8.0.1 adresini al. Client ile server arasında kurulacak ağ’da kullanılacak IP blogu, dilediğiniz şekilde subnetleyebilirsiniz 
 
 ```
 server 10.8.0.0 255.255.255.0
@@ -254,11 +252,11 @@ gerekli bilgileri ipp.txt dosyasına yazıp, bu dosyayı da config dizine
 ```
 ifconfig-pool-persist ipp.txt
 ```
-* Bağlanan istemcilerin birbirini görebilmesi için:
+* Bağlanan istemcilerin birbirini görebilmesi için
 ```
 client-to-client 
 ```
-* bant genişliğini dilersek sınırlayabiliriz
+* Bant genişliğini dilersek sınırlayabiliriz
 ```
 shaper n 
 ```
@@ -268,34 +266,33 @@ shaper n 
 push "redirect-gateway def1 bypass-dhcp"
 
 push “dhcp-option DNS 8.8.8.8” ve push “dhcp-option DNS 8.8.4.4” 
-
-ifadeleri ile de clientlara atanacak dns sunucuların hangileri olduğunu set ediyoruz
 ```
+ifadeleri ile de clientlara atanacak dns sunucuların hangileri olduğunu set ediyoruz
+
 * Diğer direktiflerle ilgili tüm açıklamalar için */usr/share/doc/openvpn/sample/sample-config-files/server.conf* yolunda bulunan örnek yapılandırma dosyasını inceleyebilirsiniz.
 
 ```
 push "dhcp-option DNS 8.8.8.8"
 push "dhcp-option DNS 8.8.4.4"
 ```
-* bağlantı kurulduktan sonra, belli bir süre hatta veri aktarımı olmama durumunda 
-* bağlantının kesilmemesi için 
+* Bağlantı kurulduktan sonra, belli bir süre hatta veri aktarımı olmama durumunda bağlantının kesilmemesi için 
 ```
 keepalive 10 120 
 
 reneg-sec 0
 ```
-* bağlantılarda sıkıştırma kullanılması için:
+* Bağlantılarda sıkıştırma kullanılması için
 
 ```
 comp-lzo
 ```
-* Sürekli kendini terkarlayan mesajların susturulması için:
+* Sürekli kendini terkarlayan mesajların susturulması için
 
 ```
 mute 20
 ```
 
-* server’a aynı anda bağlanabilecek client sayış
+* Server’a aynı anda bağlanabilecek client sayısı
 ```
 max-clients 4
 ```
@@ -311,7 +308,7 @@ persist-tun
 status openvpn-status.log
 verb 3
 ```
-* verb modları 0- 6 arasında değişebilir 1-4 normal kullanım içindir#
+* verb modları 0- 6 arasında değişebilir 1-4 normal kullanım içindir
 
 Bu ayarlar elzem olanlardır. Çalışması için yeterlidir. Ancak buraya daha bir çok detay girebiliriz. Kaydederek çıkıyoruz ve ismini server.ovpn olarak değiştiriyoruz. Uzantı .txt olmasın dikkat!! Bunun olmaması için yukarıda bir yerlerde yapmamız gereken işlemi yazdık.
 ```
@@ -320,7 +317,7 @@ client-config-dir client-configs
 ```
 
 VPN'in IP adresleri ile yerel ağ bağlantılarının adreslerinin çakışmamasına (aynı alt ağda olmamasına) dikkat ediniz.
-IPv4 ve yönelnedirmeler hakkında biraz bilgi edinmeniz işinizi kolaylaştıracaktır.
+IPv4 ve yönelendirmeler hakkında biraz bilgi edinmeniz işinizi kolaylaştıracaktır.
 Server üzerinde;
 
 * server.conf dosyasının son hali:
@@ -329,10 +326,10 @@ Server üzerinde;
 $ sudo cp sunucu.conf /etc/openvpn/
 $ sudo mkdir /root/openvpn
 $ sudo chmod 600 /root/openvpn
-$ sudo mv ca.crt testserver.crt testserver.key dh1024.pem /root/openvpn
+$ sudo mv ca.crt testserver.crt testserver.key dh2048.pem /root/openvpn
 $ sudo /etc/init.d/openvpn restart
 ```
-#OpenVPN İSTEMCİ (Client) BAĞLANTI YAPILANDIRILMASI
+#OpenVPN İstemci (Client) Bağlantı Yapılandırılması
 
 İstemciler için birçok yetkilendirme yöntemi kullanılabilmektedir. Burada sertifika tabanlı ve shell script tabanlı iki yöntem anlatılacaktır. Öncelikle istemciye OpenVPN kurulmalıdır. Ubuntu üzerinde openvpn kurulumu ve yapılandırma dosyasının oluşturulması için aşağıda komutlar uygulanmalıdır. Windows ve MAC için farklı istemci yazılımları da bulunmaktadır. Fakat yapılandırma dosyası içeriği tüm işletim sistemlerinde aynıdır.
 İstemci makinede aşağıdaki komutlar çalıştırılarak openvpn client kurulumu yapılmalıdır.
@@ -340,7 +337,7 @@ $ sudo /etc/init.d/openvpn restart
 $ sudo apt-get update
 $ sudo apt-get install openvpn
 $ cd /etc/openvpn
-$ cp /usr/share/doc/openvpn/examples/sample-config/client.conf client.con
+$ cp /usr/share/doc/openvpn/examples/sample-config/client.conf client.conf
 
 ```
 * Sertifika tabanlı yetkilendirme için istemci yapılandırma dosyasında düzenlenmesi gerekli parametreler şunlardır.
@@ -396,7 +393,7 @@ benzer bir parametrenin de sunucu yapılandırma dosyasına  (*/etc/openvpn/ser
 ```
 push "redirect-gateway def1 bypass-dhcp"
 ```
-Bu şekilde istemci vpn sunucusuna bağlandığında 10.9.0.0 ağına dahil olacak ve istemcideki tüm trafik bu ağa yönlendirilecektir. Sunucu makinenin fiziksel olarak bağlı olduğu ağdaki diğer makinelere bağlanmak için sunucu üzerinde nat ayarları yapılmalı ve yapılandırma dosyasına aşağıdaki parametre eklenmelidir. Sunucu makinenin 192.168.1.0 ağına bağlı olduğunu varasyarsak sunucu yapılandırma dosyasına (*/etc/openvpn/server.conf*) şu parametre eklenmelidir.
+Bu şekilde istemci vpn sunucusuna bağlandığında 10.8.0.0 ağına dahil olacak ve istemcideki tüm trafik bu ağa yönlendirilecektir. Sunucu makinenin fiziksel olarak bağlı olduğu ağdaki diğer makinelere bağlanmak için sunucu üzerinde nat ayarları yapılmalı ve yapılandırma dosyasına aşağıdaki parametre eklenmelidir. Sunucu makinenin 192.168.1.0 ağına bağlı olduğunu varasyarsak sunucu yapılandırma dosyasına (*/etc/openvpn/server.conf*) şu parametre eklenmelidir.
 ```
 push "route 192.168.1.0 255.255.255.0"
 ```
@@ -503,21 +500,21 @@ bağlantıyı test edebilirsiniz. Aklınızda bulunsun, testin çalışabilmesi 
 
 Eğer aradaki bağlantıyı sorunsuz olarak kurabildiyseniz, çalıştığı ekranlarda Ctrl - C ile openVPN uygulamalarını kapatabilirsiniz. İsterseniz her bağlanma için komutları yukarıda tarif edilen şekilde verebilirsiniz. Fakat sunucu için bu pek uygun olmayacaktır. Sunucu tarafında bulunan server.conf dosyasını /etc/openvpn dizininin altına kopyalayalım. ca.crt, testserver.key, testserver.crt ve dh2048.pem  dosyalarını da /root/openvpn  dizinine kopyalayalım. İlgili dizin için de görünürlüğü kısıtlayalım. Yeri değişen dosyalar için conf dosyamızı ayarlayalım. openVPN'in yetkilerini düşürelim. Böylece güvenliğimizi artıralım. Sonra da sunucumuzu yeniden başlatalım.
 
-#OPENVPN Sunuucu Firewall ve Routing Konfigürasyonu 
+#OpenVPN Sunucu Firewall ve Routing Konfigürasyonu 
 
-Not: Openvpn sunucumuzda firewall çalışıyorsa;aşağıdaki komut ile firewall'da 1194 numaralı portu açmalıyız.
+***Not:*** Openvpn sunucumuzda firewall çalışıyorsa aşağıdaki komut ile firewall'da 1194 numaralı portu açmalıyız.
 ```
 $sudo ufw allow 1194
 $ufq status
 ```
 
 
-Firewall'dan 1194 porta izin verdiğimize göre openvpn'nin "tun0" adaptörü ile fiziksel network adaptörü"eth0"'ın birbirleri ile haberleşmesini yani NAT'lamayı yapmamız  gerekmekte.Bu işlem için ilk olarak  "sysctl.conf" dosyasında "net.ipv4.ip_forward=1" tanımını kontrol etmeliyiz.
+Firewall'dan 1194 porta izin verdiğimize göre openvpn'nin *"tun0"* adaptörü ile fiziksel network adaptörü *"eth0"*'ın birbirleri ile haberleşmesini yani NAT'lamayı yapmamız gerekmekte.Bu işlem için ilk olarak *"sysctl.conf"* dosyasında *"net.ipv4.ip_forward=1"* tanımını kontrol etmeliyiz.
 ```
 $ sudo nano /etc/ sysctl.conf
 “net.ipv4.ip_forward=1” olmalı
 ```
-*"sysctl.conf"* dosyasında alanı kontrol ettikten sonra aşağıdaki komut ile *"10.8.0.0/24 subnetinden"* *"tun0"* dan gelen paketler fiziksel network cihazına "eth0"'a yönlenecektir.Yani "Postrouting" işlemi yapıyoruz.
+*"sysctl.conf"* dosyasında alanı kontrol ettikten sonra aşağıdaki komut ile *"10.8.0.0/24 subnetinden"* *"tun0"* dan gelen paketler fiziksel network cihazına *"eth0"*'a yönlenecektir.Yani *"Postrouting"* işlemi yapıyoruz.
 ```
 $ sudo /sbin/iptable –t nat –A POSTROUTING –s 10.8.0.0/24 –o eth0 –j MASQUERADE
 
@@ -525,7 +522,7 @@ $ sudo /sbin/iptables –A FORWARD –i eth0 –o tun0 –m state --state RELATE
 
 $ sudo /sbin/iptables –A FORWARD –i tun0 –o eth0 –j ACCEPT
 ```
-***Not:***  Openvpn servisi sunucu başladığında otomatik çalışması için aşağıdaki komutu kullanmalıyız.Run level 2345 on olarak yapılandırılır.
+***Not:***  Openvpn servisi sunucu başladığında otomatik çalışması için aşağıdaki komutu kullanmalıyız. Run level 2345 on olarak yapılandırılır.
 ```
 $ update-rc.d –f openvpn defaults 
 ```
