@@ -500,7 +500,7 @@ bağlantıyı test edebilirsiniz. Aklınızda bulunsun, testin çalışabilmesi 
 
 ###Son ayarlar ve toparlama
 
-Eğer aradaki bağlantıyı sorunsuz olarak kurabildiyseniz, çalıştığı ekranlarda Ctrl - C ile openVPN uygulamalarını kapatabilirsiniz. İsterseniz her bağlanma için komutları yukarıda tarif edilen şekilde verebilirsiniz. Fakat sunucu için bu pek uygun olmayacaktır. Sunucu tarafında bulunan sunucu.conf dosyasını /etc/openvpn dizininin altına kopyalayalım. ca.crt, sunucu.key, sunucu.crt ve dh1024.pem  dosyalarını da /root/openvpn  dizinine kopyalayalım. İlgili dizin için de görünürlüğü kısıtlayalım. Yeri değişen dosyalar için conf dosyamızı ayarlayalım. openVPN'in yetkilerini düşürelim. Böylece güvenliğimizi artıralım. Sonra da sunucumuzu yeniden başlatalım.
+Eğer aradaki bağlantıyı sorunsuz olarak kurabildiyseniz, çalıştığı ekranlarda Ctrl - C ile openVPN uygulamalarını kapatabilirsiniz. İsterseniz her bağlanma için komutları yukarıda tarif edilen şekilde verebilirsiniz. Fakat sunucu için bu pek uygun olmayacaktır. Sunucu tarafında bulunan server.conf dosyasını /etc/openvpn dizininin altına kopyalayalım. ca.crt, testserver.key, testserver.crt ve dh2048.pem  dosyalarını da /root/openvpn  dizinine kopyalayalım. İlgili dizin için de görünürlüğü kısıtlayalım. Yeri değişen dosyalar için conf dosyamızı ayarlayalım. openVPN'in yetkilerini düşürelim. Böylece güvenliğimizi artıralım. Sonra da sunucumuzu yeniden başlatalım.
 
 #OPENVPN SUNUCU FIREWALL (Ateş duvarı) ve ROUTING (Yönlendirme) KONFİGÜRASYONU
 
@@ -536,4 +536,4 @@ $ update-rc.d –f openvpn defaults
 
 [3] http://openvpn.net/index.php/documentation/howto.html
 
-http://www. linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
+[4]. http://www. linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
