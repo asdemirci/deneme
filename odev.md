@@ -18,7 +18,7 @@ OpenVPN’i kurduğunuz ve çalıştırdığınız anda sisteminize tuno adında
 
 Kali üzerine OPENVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğundan aşağıda bahsedilmiştir.
 
-1. İlk önce sistemi updateliyelim.
+*1.* İlk önce sistemi updateliyelim.
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
