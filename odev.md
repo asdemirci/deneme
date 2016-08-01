@@ -100,8 +100,7 @@ Doldurmak istemediğiniz kısımları enter'a basarak atlayabilirsiniz.
 * **Common Name:** Sunucu Hostname bilgisi 
 * **Email Address:** E-mail adresi bilgisi
 
-
-*5.* Yukarıdaki alanlar doldurulduktan sonra aşağıdaki komutlar sırası ile çalıştırılır ve sertifika otoritesi oluşturma aşaması gerçekleştirilir. En son aşamada ise oluşturulan sertifikalarda ilgili dizinlere kopyalanır.
+*5.* *var* dosyası yapılandırıldıktan sonra aşağıdaki komutlar sırası ile çalıştırılır ve sertifika otoritesi oluşturma aşaması gerçekleştirilir.
 ```
 $ sudo su
 
@@ -113,54 +112,42 @@ $ ./clean-all
 
 $ ./build-ca
 ```
-*build-ca* komutunu verdiğiniz zaman, *vars* dosyasında tanımladığımız değişkenlere uygun olarak *ca anahtarları* oluşturulacak ve çıktı aşağıdaki gibi olacaktır.
+*build-ca* komutu çalıştırılırsa, *vars* dosyasında tanımlanan değişkenlere uygun olarak *ca anahtarları* oluşturulur ve aşağıdaki gibi çıktı yansıtılır.
 
 **RESIM EKLE**
 
-#Sunucu(Server) Sertifikası Hazırlama
+# Server Sertifikası Hazırlama
 
-Sertifika otoritresini yapılandırdıktan sonra, *OpenVPN sunucusuna* ait anahtarları oluşturuyoruz.
+*6.* Sertifika otoritesi yapılandırıldıktan sonra, *OpenVPN sunucusuna* ait anahtarlar oluşturulur. 
 
 ```
 $ ./build-key-server testserver
 ```
 
-**Not:** * /build-key-server* komutunda kullandığımız testserver ismi, server.conf dosyasında cert ve key parametrelerini *testserver.crt* ve *testserver.key* olarak set ettiğimiz için girilmektedir. Dosyada bu parametreleri kendinize göre düzenlediyseniz, bu komutta verdiğiniz key ismi de aynı olmalıdır. Bu komutun çıktısı ise gene *vars* dosyasında belirtiğimiz değişkenlere uygun olarak aşağıdaki gibi olacaktır 
-*/etc/openvpn/easy-rsa/vars* dosyasına girdiğimiz "TR, Network Defense, TOBBETÜ"gibi alanları "Enter"la geçiyoruz.
+**Not:** * /build-key-server* komutunda kullanılan testserver ismi isteğe bağlı olarak seçilebilir. Yalnız, server.conf dosyasında cert ve key parametrelerini set ederken *testserver.crt* ve *testserver.key* olacak şekilde testserver key ismi aynen kullanılmalıdır. Bu komutun çıktısı ise  *vars* dosyasında belirtilen parametrelere uygun olarak aşağıdaki gibi olur. Komut çalıştığında karşımıza gelen, */etc/openvpn/easy-rsa/vars* dosyasına girdiğimiz "TR, Network Defense, TOBBETÜ"gibi alanları enter butonu yardımıyla direkt geçebilirsiniz.
 ```
-“Sign the certificate? [y/n]” ve “1 out of certificate requests certified, commit? [y/n] alanlarına ise "y" yazarak cevaplamamız gerekmekte. 
+"Sign the certificate? [y/n]" ve "1 out of certificate requests certified, commit? [y/n]" alanlarına ise "y" yazarak cevaplamamız gerekmektedir.
 ```
+*7.* Server sertifika ve anahtar oluşturma işlemi tamamlandıktan sonra, anahtar değiş tokuşu için kullanılacak *Diffie Hellman dosyası* oluşturulur. Bu dosya en baştada oluşturulabilir.
 
-Server sertifikaları oluştuğuna göre, aşağıdaki komutlarla oluşan sertifikaları */etc/openvpn/* pathine taşımaya sıra geldi. Bu işlem için aşağıdaki komutları terminal konsolda çalıştırmalıyız.
+*Vars* dosyasının ilgili parametresinde değişiklik yapılmadığı için anahtar dizini *~/easy-rsa/key* dizini olur. Oluşturulan anahtar ve sertifika dosyaları bu dizin altında bulunur. *".key"* uzantılı dosyalar gizli dosyalardır ve özel anahtarı içerirler. *".crt"* uzantılı dosyalar ise dağıtılabilir ve herkes tarafından bilinebilir.
+
+```
+$ ./build-dh
+```
+Artık server sertifika ve keyler oluşmuştur. Aşağıdaki komutlar kullanılarak oluşan sertifika ve keyler */etc/openvpn/* dizinine kopyalanır. Komutları çalıştırarak kopyalama işlemi gerçekleştirebilir.
 
 ```
 $ cd keys/
 
 #$ openvpn --genkey --secret ta.key
 
-$ sudo cp testserver.crt testserver.key ca.crt dh2048.pem  /etc/openvpn
-```
-*6.* Sonra, anahtar değiş tokuşu için kullanılacak *Diffie Hellman dosyasını* oluşturuyoruz.
-
-*Vars* dosyasını değiştirmediğimiz için anahtar dizini *~/easy-rsa/key* dizini olacaktır. Bundan sonra oluşturulacak anahtar ve sertifika dosyaları bu dizin altında bulunacaktır. *".key"* uzantılı dosyalar gizli dosyalardır ve özel anahtarı içerirler. *".crt"* uzantılı dosyalar ise dağıtılabilir.
-
-```
-$ ./build-dh
-```
-Verdiğimiz komutları açıklayayım:
-```
-1. Sertifikaları ve anahtarları oluşturmadan önce karşılıklı şifrelemenin gerçekleşebilmesi için bazı parametrelerin belirlenmesi gerekmektedir. Bu değişim parametreleri Diffie Hellman adı verilen teknik ile sağlanmaktadır.
-
-2. CA sertifikasını ve anahtarını oluşturur.
-
-3. Sunucu için gerekli sertifika/anahtar çiftini oluşturur. Sunucumuzun adı bundan sonra testserver olarak anılır.
-
-4. testclient istemcisi için gerekli sertifika/anahtar çiftini oluşturur.
+$ sudo cp testserver.crt testserver.key ca.crt dh2048.pem  /etc/openvpn/
 ```
 
-#İstemci (Client) Sertifikası Hazırlama
+#Client Sertifikası Hazırlama
 
-Öncelikle server üzerinde client için sertifikaların oluşturulması gerekiyor. Crt, key, pem dosyalarını *"/etc/openvpn/"* pathine kopyaladıktan sonra  client sertifikası hazırlamamız gerekmekte.
+*8.*  Öncelikle server üzerinde client için sertifikaların oluşturulması gerekir. Crt, key, pem dosyalarını *"/etc/openvpn/"* dizinine kopyaladıktan sonra client sertifikası ve oluşturma işlemi aşağıdaki komutlar yardımı ile başlatılır.
 ```
 $ cd /etc/openvpn/easy-rsa
 
@@ -168,32 +155,44 @@ $ source vars
 
 $ ./build-key  testclient
 ```
-Böylece, CA, server ve client için sertifika/anahtarı oluşturmuş olduk. Bundan sonra her hangi bir client için sertifika/anahtar üretmek için yukarıdaki komut kullanılır. 
+CA, server ve client için sertifika ve anahtarı oluşturma işlemi başarı ile tamamlanır. Bundan sonra her hangi bir client için sertifika ve anahtar üretmek istenilirse yukarıdaki komutlar kullanılır. 
 
-Bu komut ile yine *“keys”* klasörü içinde *testclient.crt* ve *testclient.key* isimli dosyalar oluşuyor. 
+*./build-key* komutu ile *“keys”* klasörü içinde *testclient.crt* ve *testclient.key* isimli dosyalar oluşur. testclient ismi istenilirse değiştirilebilir. 
 Dikkat edilmesi gereken oluşturma işlemi sırasında keys dizini altında *ca.keys* ve *ca.crt* dosyalarının bulunmasıdır. Bütünlüğü bozmamak ve dosyaların taşınarak güvenliklerinin tehlikeye atılmaması için bütün oluşturma işlemlerinin tek bir bilgisayar üzerinde yapılması tavsiye edilir.
 
-Bu iki dosyayı ve ilk başta oluşturduğumuz ca.crt dosyasını, uzak lokasyonda bulunan client pc’nin config klasörü içine kopyalamamız gerekiyor. Zip’leyip mail ile gönderebilirsiniz. Aynı yöntemle birden fazla değişik isimlerde client oluşturabilirsiniz bunu unutmayın.
+Bu iki dosyayı ve ilk başta oluşturduğumuz ca.crt dosyasını, uzak lokasyonda bulunan client makinesinin config klasörü içine kopyalamak gerekir.Bu işlem ayrıca zipleyip mail gönderilerekte yapılabilir. Aynı yöntemle birden fazla değişik isimlerde client oluşturulabilir..
 
-sertifika ile yetkilendirme yapılacaksa aşağıdaki dosyaların istemciye kopyalanması gerekmektedir.
+Sertifika ile yetkilendirme yapılması için aşağıdaki dosyaların clienta kopyalanması gerekir.
 ```
 1. /etc/openvpn/ca.crt
 2. /etc/openvpn/easy-rsa/keys/testclient.crt
 3. /etc/openvpn/easy-rsa/keys/testclient.key
 ```
 
-İlk olarak dosyaları bir grup haline getirelim,bunun için tar komutu kullanılabilir *"tar –cf clientsertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/testclient.crt
-/etc/openvpn/easy-rsa/keys/testclient.key”* .clientsertifika.tar dosyasını sftp yada scp ile client makineye gönderebiliriz.
+Öncelikle dosyalar bir grup haline getirilir,bunun için tar komutu kullanılabilir. 
+*" tar –cf clientsertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/testclient.crt /etc/openvpn/easy-rsa/keys/testclient.key"* 
+*"clientsertifika.tar"* dosyası sftp yada scp ile client makineye gönderilir.
 
-**NOT:** Taşıma işleminden sonra *testclient.crt* ve *testclient.key* dosyalarını sunucudan kaldırmamız gerekmekte. Silme işlemi yerine uzantısını değiştirmemizde yeterli olacaktır.Aşağıdaki komutlar dosyaların uzantılarını değiştirecektir.
+**NOT:** Taşıma işleminden sonra *testclient.crt* ve *testclient.key* dosyalarının serverdan kaldırılması gerekir. Silme işlemi yerine uzantısının değiştirmesi yeterli olur. Aşağıdaki komutlar dosyaların uzantılarını değiştirir.
 ```
 $ sudo mv /etc/openvpn/easy-rsa/keys/testclient.crt etc/openvpn/easy-rsa/keys/testclient.crt_yedek
 $ sudo mv /etc/openvpn/easy-rsa/keys/testclient.key etc/openvpn/easy-rsa/keys/testclient.key_yedek
 ```
+Komutların yaptıkları işlemleri özetlersek:
+```
+1. Sertifikaları ve anahtarları oluşturmadan önce karşılıklı şifrelemenin gerçekleşebilmesi için bazı parametreler belirlenir. 
 
+2. CA sertifikası ve anahtarı oluşturulur.
+
+3. Server için gerekli sertifika ve anahtar çifti oluşturulur. Server adı testserver olarak isimlendirilir.
+
+4. Diffie Hellman tekniği kullanılarak anahtar değişiminde kullanılacak dosya elde edilir.
+
+5. Son olarakta testclient clientı için gerekli sertifika ve anahtar çifti oluşturulur.
+```
 #Ayar Dosyaları
 
-Sertifikalar oluşturulduktan sonra bu sertifika ve anahtarları kullanacak ayar dosyalarının da yaratılması gerekmektedir. Örnek ayar dosyalarının birer kopyasını */usr/share/doc/openvpn/examples/sample-config-files* dizininde bulabilirsiniz. *client.conf* ve *server.conf.gz* dosyalarını uygun bir dizine kopyalayıp, gz'yi açtıktan sonra *server.conf* dosyasını *server.conf* ve *client.conf* dosyasını *client.conf*  olarak kopyalayalım ve *server.conf* dosyasını ayarlamakla işe başlayalım.
+Sertifikalar oluşturulduktan sonra bu sertifika ve anahtarları kullanacak ayar dosyalarının da yaratılması gerekir. Örnek ayar dosyalarının birer kopyası */usr/share/doc/openvpn/examples/sample-config-files* dizininde bulunur. *client.conf* ve *server.conf.gz* dosyaları uygun bir dizine kopyalanır, gz uzantılı dosya açıldıktan sonra *server.conf* dosyası aynı isimle *server.conf* ve *client.conf* dosyası aynı isimle *client.conf* olarak kopyalanır. Öncelikle *server.conf* dosyası ile ilgili ayarları yapalım.
 
 ###Serverın Yapılandırılması
 
