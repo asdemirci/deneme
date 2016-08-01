@@ -39,6 +39,43 @@ sudo cp testserver.crt testserver.key ca.crt dh2048.pem /etc/openvpn
 # persist-tun
 # status openvpn-status.log
 # verb 3
+# 
+# cat /etc/resolv.conf
+# nameserver ipadresi
+# sudo /etc/init.d/openvpn stop
+# sudo /etc/init.d/openvpn start
+# netstat -an | GREP 1194
+# exit
+# exit
+# source vars
+# ./build-key testclient
+# more client.conf
+# client
+# dev tun
+# proto udp
+# remote serveradı ya da ip adresi 1194
+# nobind
+# resolv-retry infinite
+# tls-client
+# ca ca.crt
+# cert testclient.crt
+# key testclient. key
+# ns-cert-type testserver
+# cipher BF-CBC
+# tls-cipher DHE-RSA-AES256-SHA
+# tls-remote testserver
+## tls-auth /opt/local/etc/openvpn/tls-auth.key 1
+#remote-cert-tls testserver
+# comp-lzo
+# persist-key
+# persist-tun
+# mute-replay-warnings
+# verb 3
+# redirect-gateway def1
+# mlock
+
+
+
   
   log openvpn.log
   comp.lzo
@@ -60,7 +97,7 @@ sudo cp testserver.crt testserver.key ca.crt dh2048.pem /etc/openvpn
 
 sudo cd ..
 source vars 
-./build-key testclient
+ 
 sudo cd ..
 sudo touch server.conf
 sudo vim server.conf
