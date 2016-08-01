@@ -478,12 +478,13 @@ $sudo openvpn istemci1.conf
 
 Yine kalabalık olan çıktılar arasında aşağıdaki satırları görürseniz işlem tamamlanmış demektir.
 
-
+```
 Peer Connection Initiated with sunucu.adresi:1194
 ...
+
 Initialization Sequence Completed
 
-
+```
 Bu sırada sunucu tarafındaki ekranı da takip ederseniz bağlantı detaylarının ekrana yazıldığını görebilirsiniz. İstemci tarafında yeni bir uçbirim açıp;
 ```
 $ifconfig
