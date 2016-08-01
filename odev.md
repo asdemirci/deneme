@@ -94,8 +94,8 @@ export KEY_OU=”NetworkDefense”
 * **Email Address:** E-mail adresi bilgisi, doldurmak istemezseniz Enter’a basarak geçebilirsiniz.
 * Makinedeki openssl sürümüne göre */etc/openvpn/easy-rsa/* dizinindeki openssl yapılandırma dosyasına yine aynı dizinde openssl.cnf adıyla kısayol verilmelidir.
 
-*5*
-Yukarıdaki alanlar doldurulduktan sonra aşağıdaki komutlar sırası ile çalıştırılır ve sertifika otoritesi oluşturma aşaması gerçekleştirilir. En son aşamada ise oluşturulan sertifikalarda ilgili dizinlere kopyalanır.
+*5.*
+***Yukarıdaki alanlar doldurulduktan sonra aşağıdaki komutlar sırası ile çalıştırılır ve sertifika otoritesi oluşturma aşaması gerçekleştirilir. En son aşamada ise oluşturulan sertifikalarda ilgili dizinlere kopyalanır.
 ```
 $ sudo su
 
