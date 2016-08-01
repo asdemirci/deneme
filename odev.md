@@ -49,7 +49,7 @@ Sertifika oluşturmak için kullanılacak dosyaları */etc/openvpn* dizini altı
  
 Openvpn içerisinde sertifikaların kolaylıkla oluşturulabilmesi için bazı kodlar hazır olarak bulunmaktadır. Bu kodlar Ubuntu içerisinde */usr/share/doc/openvpn/examples/easy-rsa* ya *da/usr/share/easy-rsa/* *dizininde bulunurlar.
 
-*3. *
+*3.*
 ```
 $ sudo su
 $ mkdir /etc/openvpn/easy-rsa/
