@@ -17,7 +17,7 @@ OpenVPN’i kurduğunuz ve çalıştırdığınız anda sisteminize tuno adında
 #Kali üzerine OPENVPN Kurulum
 
 Kali üzerine OPENVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğundan aşağıda bahsedilmiştir.
-```
+
 1. İlk önce sistemi updateliyelim.
 ```
 $ sudo apt-get update
@@ -46,13 +46,15 @@ Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenili
 #Sertifikaların Oluşturulması ve  Sertifika ile Yetkilendirme
 Sertifika oluşturmak için kullanılacak dosyaları */etc/openvpn* dizini altına taşıyalım.
 
-  *2. adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. 
+  2. adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. 
  
 Openvpn içerisinde sertifikaların kolaylıkla oluşturulabilmesi için bazı kodlar hazır olarak bulunmaktadır. Bu kodlar Ubuntu içerisinde */usr/share/doc/openvpn/examples/easy-rsa* ya *da/usr/share/easy-rsa/* *dizininde bulunurlar.
 
-*3.
+3.
 ```
 $ sudo su
+
 $ mkdir /etc/openvpn/easy-rsa/
+
 $ sudo cp -R /usr/share/easy-rsa/* /etc/openvpn/easy-rsa
 ```
