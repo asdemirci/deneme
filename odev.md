@@ -32,6 +32,7 @@ $ sudo apt-get install openvpn easy-rsa
 # Sertifikalı Bağlantı Kullanımı
 
 Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenilir olarak bağlanabilir. Trafiğin SSL ile şifreli olarak gönderilebilmesi içinde sertifikaya ihtiyaç duyulmaktadır.
+
 **Sertifikalı Bağlantı Çalışma Mekanızması:**
 * Her bir cihazın sertifikası tek bir **sertifika otoritesi (certificate authority-CA)** tarafından imzalanır. 
 
@@ -44,6 +45,7 @@ Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenili
 * Şifrelenmiş verileri de sertifika sahibi yani özel anahtarı bulunan kişi açabilir.
 
 #Sertifikaların Oluşturulması ve  Sertifika ile Yetkilendirme
+
 Sertifika oluşturmak için kullanılacak dosyaları */etc/openvpn* dizini altına taşıyalım.
 
  *2.* adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. 
