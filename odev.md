@@ -45,6 +45,6 @@ Sertifikalı bağlantılar sayesinde birden fazla bilgisayar birbirine güvenili
 #Sertifikaların Oluşturulması ve  Sertifika ile Yetkilendirme
 Sertifika oluşturmak için kullanılacak dosyaları */etc/openvpn* dizini altına taşıyalım.
 
-   2. adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. 
+  *2.* adımda gerçekleştirilen *openvpn* ve *easy-rsa* paket kurulumları tamamlandığına göre aşağıdaki adımları gerçekleştirebiliriz. 
  
 Openvpn içerisinde sertifikaların kolaylıkla oluşturulabilmesi için bazı kodlar hazır olarak bulunmaktadır. Bu kodlar Ubuntu içerisinde */usr/share/doc/openvpn/examples/easy-rsa* ya *da/usr/share/easy-rsa/* *dizininde bulunurlar.
