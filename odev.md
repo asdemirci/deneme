@@ -180,11 +180,7 @@ sertifika ile yetkilendirme yapılacaksa aşağıdaki dosyaların istemciye kopy
 
 İlk olarak dosyaları bir grup haline getirelim,bunun için tar komutu kullanılabilir *"tar –cf istemcisertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/testclient.crt
 /etc/openvpn/easy-rsa/keys/testclient.key”* .clientsertifika.tar dosyasını sftp yada scp ile client makineye gönderebiliriz.
-```
-/etc/openvpn/ca.crt
-/etc/openvpn/easy-rsa/keys/ testclient.crt
-/etc/openvpn/easy-rsa/keys/ testclient.key
-```
+
 **NOT:** Taşıma işleminden sonra *testclient.crt* ve *testclient.key* dosyalarını sunucudan kaldırmamız gerekmekte. Silme işlemi yerine uzantısını değiştirmemizde yeterli olacaktır.Aşağıdaki komutlar dosyaların uzantılarını değiştirecektir.
 ```
 $ sudo mv /etc/openvpn/easy-rsa/keys/testclient.crt etc/openvpn/easy-rsa/keys/testclient.crt_yedek
@@ -199,7 +195,8 @@ Sertifikalar oluşturulduktan sonra bu sertifika ve anahtarları kullanacak ayar
 
 
 *"/usr/share/doc/openvpn/examples/sample-config-files/"* pathinde bulunan *"server.conf.gz"* dosyasını *"/etc/openvpn/"* pathine taşıyıp bu sıkıştırılmış dosyayı * "/etc/openvpn/"* dizininde açmamız gerekmekte.
-Örnek server yapılandırma dosyalarının kopyalanması için aşağıdaki komutlar uygulamlıdır.```
+Örnek server yapılandırma dosyalarının kopyalanması için aşağıdaki komutlar uygulamlıdır.
+```
 $ sudo mkdir ~/openvpn
 $ sudo cd ~/openvpn
 $ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/{client.conf,server.conf.gz}  .
@@ -221,52 +218,51 @@ $nano /etc/openvpn/server.conf
 ```
 **ÖRNEK:** *"server.conf"* dosyasında tanımlı olması gereken alanlar;
 
-*UDP protokolünün 1194 nolu portundan gelen bağlantıları kabul et.
+* UDP protokolünün 1194 nolu portundan gelen bağlantıları kabul et.
 ```
 port 1194
 proto udp
 ```
-Katman 3 bir tünel oluştur (dev tun).
-oluşturulan sanal ağ bağdaştıcısının tip routedd vpn yapacağımız için tun diyoruz
+* Katman 3 bir tünel oluştur (dev tun).
+* oluşturulan sanal ağ bağdaştıcısının tip routedd vpn yapacağımız için tun diyoruz
 ```
 dev tun
 ```
-CA sertifikası ca.crt, sunucu sertifikan testserver.crt ve sunucu anahtarın testserver.key dosyasındadır.
+* CA sertifikası ca.crt, sunucu sertifikan testserver.crt ve sunucu anahtarın testserver.key dosyasındadır.
 
 ```
 ca /etc/openvpn/easy-rsa/keys/ca.crt
 cert /etc/openvpn/easy-rsa/keys/testserver.crt
 key /etc/openvpn/easy-rsa/keys/testserver.key 
 ```
-Diffie-Hellman için dh1024.pem dosyasını kullan.
+* Diffie-Hellman için dh1024.pem dosyasını kullan.
 
 ```
 dh /etc/openvpn/easy-rsa/keys/dh2048.pem
 ```
-Ağdaki IP adreslerini 10.8.0.0 - 10.8.0.254 arasında dağıt kendine de 10.8.0.1 adresini al.
-client ile server arasında kurulacak ağ’da kullanılacak IP blogu, 
-dilediğiniz şekilde subnetleyebilirsiniz 
+* Ağdaki IP adreslerini 10.8.0.0 - 10.8.0.254 arasında dağıt kendine de 10.8.0.1 adresini al.
+* client ile server arasında kurulacak ağ’da kullanılacak IP blogu, dilediğiniz şekilde subnetleyebilirsiniz 
 
 ```
 server 10.8.0.0 255.255.255.0
 ```
-Ek olarak şu ayarları yapabilirsiniz:
+* Ek olarak şu ayarları yapabilirsiniz:
 
-Sunucuya bağlanan bilgisayarların IP adreslerini korunması ve her seferinde aynı kalması için aşağıdaki komutu verebilirsiniz. eğer bazı clientlara hep aynı IP adresinin atanmasını istiyorsak, 
+* Sunucuya bağlanan bilgisayarların IP adreslerini korunması ve her seferinde aynı kalması için aşağıdaki komutu verebilirsiniz. eğer bazı clientlara hep aynı IP adresinin atanmasını istiyorsak, 
 gerekli bilgileri ipp.txt dosyasına yazıp, bu dosyayı da config dizine
 
 ```
 ifconfig-pool-persist ipp.txt
 ```
-Bağlanan istemcilerin birbirini görebilmesi için:
+* Bağlanan istemcilerin birbirini görebilmesi için:
 ```
 client-to-client 
 ```
-## bant genişliğini dilersek sınırlayabiliriz ##
+* bant genişliğini dilersek sınırlayabiliriz
 ```
 shaper n 
 ```
-n değeri 100 bps ile 100 Mbps arasında olabilir. Ancak çok düşük hızlarda TCP protokolü kullanırsak geçikme sürekli artıyor ve connecion time out oluyor. Bunun çözümü ise MTU'u biraz düşürmektir. 
+* n değeri 100 bps ile 100 Mbps arasında olabilir. Ancak çok düşük hızlarda TCP protokolü kullanırsak geçikme sürekli artıyor ve connecion time out oluyor. Bunun çözümü ise MTU'u biraz düşürmektir. 
 İstemcilerin bütün İnternet trafiklerinin sunucu üzerinden olmasını istiyorsanız, sunucu ayarları içine komutunu koymanız gerekir. Bu durumda sunucu üzerinden İnternet'e çıkış ayarlarını da ayrıca yapmanız gerekir. *"redirect-gateway"* komutu bütün trafiği yönlendirdiği için DHCP adresi alamama gibi sorunlara da yol açabilmektedir.  push “redirect-gateway def1 bypass-dhcp” ifadesi ile clientların default gateway olarak OpenVPN sunucusunu kullanabileceklerni belirtiyoruz. Bu şekilde client tarafından üretilen tüm trafik tünel içerisinden geçerek OpenVPN üzerinden pass ediliyo
 ```
 push "redirect-gateway def1 bypass-dhcp"
@@ -275,47 +271,47 @@ push “dhcp-option DNS 8.8.8.8” ve push “dhcp-option DNS 8.8.4.4”
 
 ifadeleri ile de clientlara atanacak dns sunucuların hangileri olduğunu set ediyoruz
 ```
-Diğer direktiflerle ilgili tüm açıklamalar için */usr/share/doc/openvpn-2.3.2/sample/sample-config-files/server.conf* yolunda bulunan örnek yapılandırma dosyasını inceleyebilirsiniz.
+* Diğer direktiflerle ilgili tüm açıklamalar için */usr/share/doc/openvpn/sample/sample-config-files/server.conf* yolunda bulunan örnek yapılandırma dosyasını inceleyebilirsiniz.
 
 ```
 push "dhcp-option DNS 8.8.8.8"
 push "dhcp-option DNS 8.8.4.4"
 ```
-bağlantı kurulduktan sonra, belli bir süre hatta veri aktarımı olmama durumunda 
-bağlantının kesilmemesi için 
+* bağlantı kurulduktan sonra, belli bir süre hatta veri aktarımı olmama durumunda 
+* bağlantının kesilmemesi için 
 ```
 keepalive 10 120 
 
 reneg-sec 0
 ```
-bağlantılarda sıkıştırma kullanılması için:
+* bağlantılarda sıkıştırma kullanılması için:
 
 ```
 comp-lzo
 ```
-Sürekli kendini terkarlayan mesajların susturulması için:
+* Sürekli kendini terkarlayan mesajların susturulması için:
 
 ```
 mute 20
 ```
 
-server’a aynı anda bağlanabilecek client sayış
+* server’a aynı anda bağlanabilecek client sayış
 ```
 max-clients 4
 ```
-Ayar dosyası ile çalıştırmak için aşağıdaki bölüme bakabilirsiniz. Şimdi istemci cihazın da ayar dosyasını yapalım.
+* Ayar dosyası ile çalıştırmak için aşağıdaki bölüme bakabilirsiniz. Şimdi istemci cihazın da ayar dosyasını yapalım.
 ```
 user nobody
 group nogroup
 ```
-user ve group parametlerinin nobody ve nogroup olarak ayarlanması openvpn servisinin nobody veya nogroup yetkilerine sahip diğer servislerde oluşabilecek açıklıklardan etkilenmemesi için tavsiye edilmez. OpenVPN için farklı bir kullanıcı ve grup oluşturulabilir.
+* *user* ve *group* parametlerinin *nobody* ve *nogroup* olarak ayarlanması openvpn servisinin *nobody* veya *nogroup* yetkilerine sahip diğer servislerde oluşabilecek açıklıklardan etkilenmemesi için tavsiye edilmez. OpenVPN için farklı bir kullanıcı ve grup oluşturulabilir.
 ```
 persist-key
 persist-tun
 status openvpn-status.log
 verb 3
 ```
-verb modları 0- 6 arasında değişebilir 1-4 normal kullanım içindir#
+* verb modları 0- 6 arasında değişebilir 1-4 normal kullanım içindir#
 
 Bu ayarlar elzem olanlardır. Çalışması için yeterlidir. Ancak buraya daha bir çok detay girebiliriz. Kaydederek çıkıyoruz ve ismini server.ovpn olarak değiştiriyoruz. Uzantı .txt olmasın dikkat!! Bunun olmaması için yukarıda bir yerlerde yapmamız gereken işlemi yazdık.
 ```
@@ -323,18 +319,17 @@ log-append openvpn.log 
 client-config-dir client-configs
 ```
 
-Eğer her bir sertifika içine farklı bilgiler gömmek isterseniz pkitool komutlarını --interact parametresi ile çalıştırabilirsiniz.
 VPN'in IP adresleri ile yerel ağ bağlantılarının adreslerinin çakışmamasına (aynı alt ağda olmamasına) dikkat ediniz.
 IPv4 ve yönelnedirmeler hakkında biraz bilgi edinmeniz işinizi kolaylaştıracaktır.
-Sunucu üzerinde;
+Server üzerinde;
 
-Sunucu.conf dosyasının son hali:
+* server.conf dosyasının son hali:
 
 ```
 $ sudo cp sunucu.conf /etc/openvpn/
 $ sudo mkdir /root/openvpn
 $ sudo chmod 600 /root/openvpn
-$ sudo mv ca.crt iyiSunucu.crt iyiSunucu.key dh1024.pem /root/openvpn
+$ sudo mv ca.crt testserver.crt testserver.key dh1024.pem /root/openvpn
 $ sudo /etc/init.d/openvpn restart
 ```
 #OpenVPN İSTEMCİ (Client) BAĞLANTI YAPILANDIRILMASI
@@ -348,7 +343,7 @@ $ cd /etc/openvpn
 $ cp /usr/share/doc/openvpn/examples/sample-config/client.conf client.con
 
 ```
-Sertifika tabanlı yetkilendirme için istemci yapılandırma dosyasında düzenlenmesi gerekli parametreler şunlardır.
+* Sertifika tabanlı yetkilendirme için istemci yapılandırma dosyasında düzenlenmesi gerekli parametreler şunlardır.
 ```
 Remote SERVER_IP 1194
 ca ca.crt
@@ -360,7 +355,7 @@ Windows bir makineden bağlanılacak ise aşağıdaki web adresinden uygun olan 
 https://openvpn.net/index.php/open-source/downloads.html
 
 Anlatıma linux istemci ile devam ediyorum,istemci makineye openvpn client kurulumu yapıldıktan sonra aşağıda belirttiğim dizinden *"client.conf"* dosyası *"/etc/openvpn/"* dizinine kopyalanır.
-Ayrıca sunucu üzerinde daha önce "tar"layıp oluşturduğumuz "istencisertifika.tar"dosyasında bulunan sertifikalarıda yine bu dizine *"/etc/openvpn"* çıkarmalıyız. Bu işlemleri yapabilmek için aşağıda verdiğim komutları terminalde çalıştırmalıyız.
+Ayrıca sunucu üzerinde daha önce "tar"layıp oluşturduğumuz *"clientsertifika.tar"* dosyasında bulunan sertifikalarıda yine bu dizine *"/etc/openvpn"* çıkarmalıyız. Bu işlemleri yapabilmek için aşağıda verdiğim komutları terminalde çalıştırmalıyız.
 ```
 cd /usr/share/doc/openvpn/examples/sample-config-files
 sudo cp client.conf /etc/openvpn/.
@@ -406,7 +401,9 @@ Bu şekilde istemci vpn sunucusuna bağlandığında 10.9.0.0 ağına dahil olac
 push "route 192.168.1.0 255.255.255.0"
 ```
 
-Server ve client kurulumu bitti. Yapmamız gereken işlem adımı port yönlendirmek.
+Server ve client kurulumu bitti. 
+
+* Yapmamız gereken işlem adımı port yönlendirmek.
 
 Modemlerde wan 1194 udp portuna gelen istekleri içerideki VPN serverin statik ip adresine ve 1194 portuna yönlendireceksiniz. Airties vb modemlerde Nat menüsü altında port forwarding kısmından kolayca yapabilirsiniz.
 
@@ -414,7 +411,7 @@ Eğer router varsa ve mevcut nat yapılandırması doğru ise , mesela cisco ise
 
 ip nat inside source static udp a.b.c.d 1194 (wan_int) 1194 komutu ile bu işi halledersiniz.
 
-Arada firewall varsa oradada aynı işlem yapılmalıdır. Herhangi bir unix firewall üzerinde iptables için :
+* Arada firewall varsa oradada aynı işlem yapılmalıdır. Herhangi bir unix firewall üzerinde iptables için :
 ```
 # echo 1 > /proc/sys/net/ipv4/ip_forward
 # iptables -t nat -A PREROUTING -p udp -d x.y.x.j --dport 1194 -j DNAT --to-destination a.b.c.d
@@ -423,7 +420,7 @@ Arada firewall varsa oradada aynı işlem yapılmalıdır. Herhangi bir unix fir
 # iptables -A OUTPUT -p udp --dport 1194 -j ACCEPT
 # service iptables save
 ```
-a.b.c.d : VPN server WAN ip adresidir. x.y.z.j ise firewall Lan side ip adresidir. 
+* a.b.c.d : VPN server WAN ip adresidir. x.y.z.j ise firewall Lan side ip adresidir. 
 Sunucu üzerindeki nat ayarları için aşağıdaki komutlar uygulanmalıdır. Komutlar aynı zamanda /etc/rc.local dosyasına eklenirse makine yeniden başlatıldığında da nat ayarları etkinleştirilecektir.
 ```
 echo "1" > /proc/sys/net/ipv4/ip_forward 
@@ -432,16 +429,16 @@ iptables -A FORWARD -i eth0 -o tun0 -m state --state RELATED,ESTABLISHED -j ACCE
 iptables-save 
 exit 0
 ```
-Bu bölümde farklı iptables kuralları yazılabilir örneğin sadece aşağıdaki komutun uygulanması da yeterli olacaktır. VPN erişimi internet üzerindeki herhangi bir VPS sunucu ile gerçekleşiyorsa VPS'in IP adresine bağlı olarak şu şekilde nat yapılabilir.
+* Bu bölümde farklı iptables kuralları yazılabilir örneğin sadece aşağıdaki komutun uygulanması da yeterli olacaktır. VPN erişimi internet üzerindeki herhangi bir VPS sunucu ile gerçekleşiyorsa VPS'in IP adresine bağlı olarak şu şekilde nat yapılabilir.
 ```
 echo "1" > /proc/sys/net/ipv4/ip_forward 
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to-source VPS_IP_ADDRESS
 iptables-save 
 exit 0
 ```
-Sunucu üzerinde OpenVPN yeniden başlatılmalıdır.
+* Sunucu üzerinde OpenVPN yeniden başlatılmalıdır.
 ```
-#/etc/init.d/openvpn restart
+/etc/init.d/openvpn restart
 ```
 #Programın Çalıştırılması
 
@@ -449,10 +446,10 @@ Sunucu üzerinde OpenVPN yeniden başlatılmalıdır.
 ```
 $sudo service openvpn restart
 Or 
-/etc/init.d/openvpn restart 
+$ /etc/init.d/openvpn restart 
 ```
 
-Ubuntu'nun paket deposundan yüklediğinizde program daemon olarak çalışmaya başlar. Ve kendini her açılışta çalıştırmak üzere ayarlar. Otomatik olarak başlarken okuması gereken ayar dosyalarını /etc/openvpn dizini altına koyabilirsiniz. Böylece her açılışta doğru ayarlar ile başlayacaktır. Şu anda cihazı açıp kapatma gibi bir lüksümüz olmadığı için öncelikle deamon'ı sonlandıralım.
+* Ubuntu'nun paket deposundan yüklediğinizde program daemon olarak çalışmaya başlar. Ve kendini her açılışta çalıştırmak üzere ayarlar. Otomatik olarak başlarken okuması gereken ayar dosyalarını /etc/openvpn dizini altına koyabilirsiniz. Böylece her açılışta doğru ayarlar ile başlayacaktır. Şu anda cihazı açıp kapatma gibi bir lüksümüz olmadığı için öncelikle deamon'ı sonlandıralım.
 ```
 $ sudo /etc/init.d/openvpn stop
 ```
