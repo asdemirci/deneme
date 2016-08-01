@@ -71,7 +71,7 @@ Böyle bir hata alındığında *easy-rsa* içerikleri tekrar indirilir ve */etc
 
 *4.*
 ```
-$ cd  ~/easy-rsa
+$ cd  /etc/openvpn/easy-rsa/
 ```
 Dosyalar kopyalandıktan sonra *easy-rsa* dizinine gidilir.Bu dizin altında yeralan *vars* dosyası bir metin düzenleyicisi ile açılır. Sertifika oluşturulurken yer alacak verilerin hızlı bir şekilde yaratılması için kullanılan değerler bu dosyada bulunur. Aşağıda bulunan parametreler istenirse dafaultda verilen hali ile kalabilir ya da istenilen değerler girilebilir. Örnek amaçlı bazı değerler verilmiştir. Sadece dosyanın sonunda yer alan ön tanımlı parametlerin değiştirilmesi yeterlidir. Her sertifika için farklı değerler girelebilir. Yapılan değişiklikler tamamlandıktan sonra sayfayı kaydedilir.
 
@@ -131,14 +131,14 @@ $ ./build-key-server testserver
 *Vars* dosyasının ilgili parametresinde değişiklik yapılmadığı için anahtar dizini *~/easy-rsa/key* dizini olur. Oluşturulan anahtar ve sertifika dosyaları bu dizin altında bulunur. *".key"* uzantılı dosyalar gizli dosyalardır ve özel anahtarı içerirler. *".crt"* uzantılı dosyalar ise dağıtılabilir ve herkes tarafından bilinebilir.
 
 ```
+$ source vars
+$ ./clean-all
 $ ./build-dh
 ```
 Artık server sertifika ve keyler oluşmuştur. Aşağıdaki komutlar kullanılarak oluşan sertifika ve keyler */etc/openvpn/* dizinine kopyalanır. Komutları çalıştırarak kopyalama işlemi gerçekleştirebilir.
 
 ```
 $ cd keys/
-
-#$ openvpn --genkey --secret ta.key
 
 $ sudo cp testserver.crt testserver.key ca.crt dh2048.pem  /etc/openvpn/
 ```
@@ -188,7 +188,7 @@ $ sudo mv /etc/openvpn/easy-rsa/keys/testclient.key etc/openvpn/easy-rsa/keys/te
 
 5. Son olarakta testclient clientı için gerekli sertifika ve anahtar çifti oluşturulur.
 ```
-#Ayar Dosyaları
+#Konfigürasyon Dosyaları
 
 Sertifikalar oluşturulduktan sonra bu sertifika ve anahtarları kullanacak ayar dosyalarının da yaratılması gerekir. Örnek ayar dosyalarının birer kopyası */usr/share/doc/openvpn/examples/sample-config-files* dizininde bulunur. *client.conf* ve *server.conf.gz* dosyaları uygun bir dizine kopyalanır, gz uzantılı dosya açıldıktan sonra *server.conf* dosyası aynı isimle *server.conf* ve *client.conf* dosyası aynı isimle *client.conf* olarak kopyalanır. Öncelikle *server.conf* dosyası ile ilgili ayarları yapalım.
 
@@ -198,17 +198,12 @@ Sertifikalar oluşturulduktan sonra bu sertifika ve anahtarları kullanacak ayar
 
 Server yapılandırma dosyalarının kopyalanması için aşağıdaki komutlar uygulanmalıdır.
 ```
-$ sudo mkdir ~/openvpn
-$ sudo cd ~/openvpn
-$ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/{client.conf,server.conf.gz}  .
-$ sudo gunzip server.conf.gz
-$ sudo cp {server,server}.conf
-$ sudo cp {client,client}.conf
-```
-ya da 
-```
+$ sudo mkdir/etc/openvpn
+$ sudo cd /etc/openvpn
 $ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn
+$ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn
 $ sudo gzip –d /etc/openvpn/server.conf.gz
+
 ```
 komutları kullanılır.
 
@@ -241,7 +236,7 @@ key /etc/openvpn/testserver.key
 ```
 dh /etc/openvpn/easy-rsa/keys/dh2048.pem
 ```
-*  Client ile server arasında kurulacak ağda kullanılacak IP blogu için, IP adresleri 10.8.0.0 - 10.8.0.254 arasında dağıtılır. Server 
+*  Client ile server arasında kurulacak ağda kullanılacak IP blogu için, IP adresleri 10.8.0.0 - 10.8.0.254 arasında dağıtılır.  
 
 ```
 server 10.8.0.0 255.255.255.0
@@ -309,16 +304,6 @@ log-append openvpn.log 
 client-config-dir client-configs
 ```
 
-Bu ayarlar önemli olanlardır ve serverın çalışması için yeterlidir. Ancak buraya daha bir çok detay girebilir.Dosya kaydedilerek çıkılır ve ismi server.ovpn olarak değiştirilir. Uzantının doğru oluşturulduğuna dikkat edilmelidir.
-
-
-```
-$ sudo cp server.conf /etc/openvpn/
-$ sudo mkdir /root/openvpn
-$ sudo chmod 600 /root/openvpn
-$ sudo mv ca.crt testserver.crt testserver.key dh2048.pem /root/openvpn
-$ sudo /etc/init.d/openvpn restart
-```
 #OpenVPN İstemci (Client) Bağlantı Yapılandırılması
 
 * Client için ayar dosyasının hazırlanması gereklidir. Clientlar için birçok yetkilendirme yöntemi kullanılır. Sertifika bağlantılı yöntem anlatılmıştır. Öncelikle clienta OpenVPN kurulur. Ubuntu üzerinde openvpn kurulumu ve yapılandırma dosyasının oluşturulması için aşağıdaki komutlar uygulanmalıdır. Windows ve MAC için farklı client yazılımları da bulunur. Fakat yapılandırma dosyası içeriği tüm işletim sistemlerinde aynıdır.
@@ -334,9 +319,9 @@ $ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf client
 * Sertifika tabanlı yetkilendirme için client yapılandırma dosyasında düzenlenmesi gerekli parametreler şunlardır.
 ```
 Remote SERVER_IP 1194
-ca ca.crt
-cert testclient.crt
-key testclient.key
+ca /etc/openvpn/ca.crt
+cert /etc/openvpn/testclient.crt
+key /etc/openvpn/testclient.key
 ```
 
 Windows bir makineden bağlanılacak ise aşağıdaki web adresinden uygun olan client versiyonu indirilir ve kurulur.
@@ -392,7 +377,7 @@ push "route 192.168.1.0 255.255.255.0"
 
 Server ve client ayarları yapılandırılmıştır.
 
-* Yapmamız gereken işlem adımı port yönlendirmek.
+* Yapmamız gereken işlem adımı port yönlendirmektir.
 
 Modemlerde wan 1194 udp portuna gelen istekler içerideki VPN serverin statik ip adresine ve 1194 portuna yönlendirilmelidir. Bazı modemlerde nat menüsü altında port forwarding kısmından kolayca yapılabilir.
 
