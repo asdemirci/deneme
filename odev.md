@@ -2,11 +2,11 @@
 
 #VPN ve OpenVPN nedir?
 
-**VPN(Virtual Private Network/Sanal Özel Ağ)** internet üzerinden şifreli ve güvenli olarak veri iletişimine ortam hazırlayan bir teknolojidir. Aynı zamanda ISP tarafından yasaklanan sitelere erişilmesini sağlar. VPN sayesinde internet kullanılarak kurumsal ağların birbirine bağlanması daha düşük maliyetlerde gerçekleştirilir. VPN sayesinde kurumsal ağlarda firewall arkasında çalışanlar güvenli bir iletişim ortamı elde ederler.
+**VPN(Virtual Private Network/Sanal Özel Ağ)** internet üzerinden şifreli ve güvenli olarak veri iletişimi sağlanılmasına ortam hazırlayan bir teknolojidir. Aynı zamanda ISP tarafından yasaklanan sitelere erişilmesini sağlar. VPN sayesinde internet kullanılarak kurumsal ağların birbirine bağlanması daha düşük maliyetlerde gerçekleştirilir. VPN sayesinde kurumsal ağlarda firewall arkasında çalışanlar güvenli bir iletişim ortamı elde ederler.
 
-İki tip VPN teknolojisi bulunur. Bunlar *“Remote Access VPN”* ve *"Site-to-site VPN”* olarak geçer. *Remote Access VPN*, farklı lokasyonlardaki şubeleri merkeze bağlamak ya da farklı yerlerde bulunan çalışanların kurum ya da firma ağına istedikleri her yerden güvenli iletişim elde etmeleri için kullanılır.
+İki tip VPN teknolojisi bulunur. Bunlar *“Remote Access VPN”* ve *"Site-to-site VPN”* olarak geçer. *Remote Access VPN*’i, farklı lokasyonlardaki şubeleri merkeze bağlamak ya da farklı yerlerde bulunan çalışanların kurum ya da firma ağına istedikleri her yerden güvenli iletişim elde etmeleri için kullanılır
 
-*Site-to-site VPN* ise farklı firmaların birbirleri ile güvenli iletişim kurmaları amacıyla oluşturulur. Aynı zamanda *Remote Access VPN* de olduğu gibi kurum şubelerinin merkez ağa bağlanması sağlanır bu VPN yapısında iki taraftada VPN sunucu bulunur.
+*Site-to-site VPN* ise farklı firmaların birbirleri ile güvenli iletişim kurmaları amacıyla oluşturulur. Aynı zamanda *Remote Access VPN* de olduğu gibi kurum şubelerinin merkez ağa bağlanması sağlanır bu VPN yapısında iki tarafta VPN sunucu bulunur.
 
 OpenVPN açık kod yazılımı olarak gerçekleştirilmiş bir VPN yazılımıdır. Birçok platformda çalışabilmektedir. GPL ile lisanslanmıştır. Sunucu ve istemci tarafı bulunmaktadır. SSL/TLS protokollerini kullanarak OSI 2. Ve 3. Katman seviyesinde şifreli ağ erişimi sağlar. Noktadan noktaya ya da köprü modu ile çalışabilmektedir. OpenSSL kütüphanesinin sağladığı şifreleme, yetkilendirme, sertifika oluşturma özelliklerinden faydalanır. Aktif ve pasif saldırılara karşı güvenliği sağlamaktadır. Tüm güvenlik duvarları, vekil sunucular, nat üzerinden sorunsuz olarak tünelleme imkânı sağlar. İstenildiği takdirde GUI ile yönetim imkânı sağlar. Hem kolay kurulur hem de birçok işletim sistemi ile uyumlu olarak çalışan modüler bir yapısı bulunur. Tüm trafik LZO Kütüphanesi kullanılark gerçek zamanlı olarak sıkıştırılmaktadır. Kablosuz ağlar için güvenli erişim imkânı sağlar. Mobil ve gömülü sistemleri de desteklemektedir. Kısa süreli bağlantı kesilmelerinde ve IP değişimlerinde kullanılan uygulamaya bağlı olarak bağlantılar devam ettirilmektedir. Bağlantı sağlanabilmesi için güvenlik duvarında tek bir port’un açık olması yeterlidir. Scripting imkânlarıyla yüksek esneklik sağlanır. OpenVPN SSL/TLS protokollerini kullandığı için Ipsec gibi işletim sisteminin çekirdeğinde temel değişiklikler gerektirmez.
 
@@ -16,7 +16,7 @@ OpenVPN’i kurduğunuz ve çalıştırdığınız anda sisteminize tun0 adında
 
 #Kali üzerine OpenVPN Kurulumu
 
-Aşağıda Kali üzerine OpenVPN’nin nasıl kurulduğu, client ve serverlar için nasıl sertifika ve key oluşturulduğu bahsedilir.
+Aşağıda Kali üzerine OpenVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için nasıl sertifika ve key oluşturulduğu bahsedilir.
 
 *1.* İlk önce sistemin güncellemesi aşağıdaki komutlar yardımıyla yapılır.
 ```
@@ -31,7 +31,7 @@ $ sudo apt-get install openvpn easy-rsa
 ```
 # Sertifikaların Gereksinimi ve Kullanım Adımları
 
-Sertifikalı bağlantılar sayesinde çok sayıda bilgisayar birbirine güvenilir olarak bağlanır. Sertifikaların kullanılmasının nedeni trafiğin SSL ile şifreli olarak gönderilebilmesini sağlamaktır.
+Sertifikalı bağlantılar sayesinde çok sayıda bilgisayar birbirine güvenilir olarak bağlanır. Sertifikaların kullanılmasının nedeni trafiğin SSL ile şifreli olarak gönderilebilmesi sağlamaktır.
 
 **Sertifikalı Bağlantı Çalışma Mekanızması:**
 
@@ -39,7 +39,7 @@ Sertifikalı bağlantılar sayesinde çok sayıda bilgisayar birbirine güvenili
 
 * Birbirleri ile iletişime girecek bilgisayarlar birbirlerine sertifikalarını gönderir.
 
-* Sertifikayı alan taraf sertifika otoritesine bakar ve sertifikanın gerçekliğini ve güvenilirliğini kontrol eder.
+* Sertifikayı alan taraf sertifika otoritesine bakar ve sertifikanın gerçekliğini ve güvenilirliğini kontrol eder..
 
 * Sertifikanın gerçekliği kanıtlandığında bundan sonra gerçekleşecek veri iletişimleri de aynı sertifika kullanılarak şifrelenir.
 
@@ -71,14 +71,14 @@ Böyle bir hata alındığında *easy-rsa* içerikleri tekrar indirilir ve */etc
 
 *4.*
 ```
-$ cd /etc/openvpn/easy-rsa
+$ cd  ~/easy-rsa
 ```
-Dosyalar kopyalandıktan sonra *easy-rsa* dizinine gidilir.Bu dizin altında yeralan *vars* dosyası bir metin düzenleyicisi ile açılır. Sertifika oluşturulurken yer alacak verilerin hızlı bir şekilde yaratılması için kullanılan değerler bu dosyada bulunur. Aşağıda bulunan parametreler istenirse dafaultda verilen hali ile kalabilir ya da istenilen değerler girilebilir. Örnek amaçlı bazı değerler verilmiştir. Sadece dosyanın sonunda yer alan ön tanımlı parametlerin değiştirilmesi yeterlidir. Her sertifika için farklı değerler girelebilir. Yapılan değişiklikler tamamlandıktan sonra sayfa kaydedilir.
+Dosyalar kopyalandıktan sonra *easy-rsa* dizinine gidilir.Bu dizin altında yeralan *vars* dosyası bir metin düzenleyicisi ile açılır. Sertifika oluşturulurken yer alacak verilerin hızlı bir şekilde yaratılması için kullanılan değerler bu dosyada bulunur. Aşağıda bulunan parametreler istenirse dafaultda verilen hali ile kalabilir ya da istenilen değerler girilebilir. Örnek amaçlı bazı değerler verilmiştir. Sadece dosyanın sonunda yer alan ön tanımlı parametlerin değiştirilmesi yeterlidir. Her sertifika için farklı değerler girelebilir. Yapılan değişiklikler tamamlandıktan sonra sayfayı kaydedilir.
 
 Aşağıda görülen */etc/openvpn/easy-rsa/vars* dosyasındaki sertifika için gerekli bilgiler, örnekteki gibi düzenlenebilir.
 
 ```
-$ sudo nano vars
+$nano /etc/openvpn/easy-rsa/vars
 
 export KEY_COUNTRY="TR"
 export KEY_PROVINCE="Network Defense"
@@ -131,8 +131,6 @@ $ ./build-key-server testserver
 *Vars* dosyasının ilgili parametresinde değişiklik yapılmadığı için anahtar dizini *~/easy-rsa/key* dizini olur. Oluşturulan anahtar ve sertifika dosyaları bu dizin altında bulunur. *".key"* uzantılı dosyalar gizli dosyalardır ve özel anahtarı içerirler. *".crt"* uzantılı dosyalar ise dağıtılabilir ve herkes tarafından bilinebilir.
 
 ```
-$ source vars
-$ ./clean-all
 $ ./build-dh
 ```
 Artık server sertifika ve keyler oluşmuştur. Aşağıdaki komutlar kullanılarak oluşan sertifika ve keyler */etc/openvpn/* dizinine kopyalanır. Komutları çalıştırarak kopyalama işlemi gerçekleştirebilir.
@@ -140,13 +138,16 @@ Artık server sertifika ve keyler oluşmuştur. Aşağıdaki komutlar kullanıla
 ```
 $ cd keys/
 
+#$ openvpn --genkey --secret ta.key
+
 $ sudo cp testserver.crt testserver.key ca.crt dh2048.pem  /etc/openvpn/
 ```
+
 #Client Sertifikası Hazırlama
 
 *8.*  Öncelikle server üzerinde client için sertifikaların oluşturulması gerekir. Crt, key, pem dosyalarını *"/etc/openvpn/"* dizinine kopyaladıktan sonra client sertifikası ve oluşturma işlemi aşağıdaki komutlar yardımı ile başlatılır.
 ```
-$ cd ..
+$ cd /etc/openvpn/easy-rsa
 
 $ source vars 
 
@@ -197,13 +198,17 @@ Sertifikalar oluşturulduktan sonra bu sertifika ve anahtarları kullanacak ayar
 
 Server yapılandırma dosyalarının kopyalanması için aşağıdaki komutlar uygulanmalıdır.
 ```
-
-$ sudo cd /usr/share/doc/openvpn/examples/sample-config-files
-$ sudo cp /server.conf.gz /etc/openvpn
+$ sudo mkdir ~/openvpn
+$ sudo cd ~/openvpn
+$ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/{client.conf,server.conf.gz}  .
+$ sudo gunzip server.conf.gz
+$ sudo cp {server,server}.conf
+$ sudo cp {client,client}.conf
+```
+ya da 
+```
+$ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn
 $ sudo gzip –d /etc/openvpn/server.conf.gz
-$ sudo cp /client.conf /etc/openvpn
-
-
 ```
 komutları kullanılır.
 
@@ -211,9 +216,8 @@ Gz dosyasını *"server.conf.gz”*, *"/etc/openvpn/"* dizininde açılırsa *"s
 
 Yanlış bir işlem yapılırsa openvpn servisi hata alır ve başlatılamama problemi ile karşılaşılır.
 ```
-$ sudo cd /etc/openvpn
-$ sudo su
-$ nano /etc/openvpn/server.conf
+$sudo su
+$nano /etc/openvpn/server.conf
 ```
 **ÖRNEK:** *"server.conf"* dosyasında tanımlı olması gereken alanlar;
 
@@ -235,7 +239,7 @@ key /etc/openvpn/testserver.key
 ```
 * Diffie-Hellman için dh2048.pem dosyasının kullanılması için.
 ```
-dh /etc/openvpn/dh2048.pem
+dh /etc/openvpn/easy-rsa/keys/dh2048.pem
 ```
 *  Client ile server arasında kurulacak ağda kullanılacak IP blogu için, IP adresleri 10.8.0.0 - 10.8.0.254 arasında dağıtılır. Server 
 
@@ -287,7 +291,7 @@ mute 20
 ```
 max-clients 100
 ```
-* *user* ve *group* parametlerinin *nobody* ve *nogroup* olarak ayarlanması OpenVPN servisinin *nobody* veya *nogroup* yetkilerine sahip diğer servislerde oluşabilecek açıklıklardan etkilenmemesi için tavsiye edilmez. OpenVPN için farklı bir kullanıcı ve grup oluşturulabilir.
+* *user* ve *group* parametlerinin *nobody* ve *nogroup* olarak ayarlanması openvpn servisinin *nobody* veya *nogroup* yetkilerine sahip diğer servislerde oluşabilecek açıklıklardan etkilenmemesi için tavsiye edilmez. OpenVPN için farklı bir kullanıcı ve grup oluşturulabilir.
 ```
 user nobody
 group nogroup
@@ -305,42 +309,50 @@ log-append openvpn.log 
 client-config-dir client-configs
 ```
 
-Bu ayarlar önemli olanlardır ve serverın çalışması için yeterlidir. Ancak buraya daha bir çok detay girebilir.Dosya kaydedilerek çıkılır. 
+Bu ayarlar önemli olanlardır ve serverın çalışması için yeterlidir. Ancak buraya daha bir çok detay girebilir.Dosya kaydedilerek çıkılır ve ismi server.ovpn olarak değiştirilir. Uzantının doğru oluşturulduğuna dikkat edilmelidir.
 
+
+```
+$ sudo cp server.conf /etc/openvpn/
+$ sudo mkdir /root/openvpn
+$ sudo chmod 600 /root/openvpn
+$ sudo mv ca.crt testserver.crt testserver.key dh2048.pem /root/openvpn
+$ sudo /etc/init.d/openvpn restart
+```
 #OpenVPN İstemci (Client) Bağlantı Yapılandırılması
 
-* Client için ayar dosyasının hazırlanması gereklidir. Clientlar için birçok yetkilendirme yöntemi kullanılır. Sertifika bağlantılı yöntem anlatılmıştır. Öncelikle clienta OpenVPN kurulur. Ubuntu üzerinde OpenVPN kurulumu ve yapılandırma dosyasının oluşturulması için aşağıdaki komutlar uygulanmalıdır. Windows ve MAC için farklı client yazılımları da bulunur. Fakat yapılandırma dosyası içeriği tüm işletim sistemlerinde aynıdır.
-Client makinede aşağıdaki komutlar çalıştırılarak OpenVPN client kurulumu yapılır.
+* Client için ayar dosyasının hazırlanması gereklidir. Clientlar için birçok yetkilendirme yöntemi kullanılır. Sertifika bağlantılı yöntem anlatılmıştır. Öncelikle clienta OpenVPN kurulur. Ubuntu üzerinde openvpn kurulumu ve yapılandırma dosyasının oluşturulması için aşağıdaki komutlar uygulanmalıdır. Windows ve MAC için farklı client yazılımları da bulunur. Fakat yapılandırma dosyası içeriği tüm işletim sistemlerinde aynıdır.
+Client makinede aşağıdaki komutlar çalıştırılarak openvpn client kurulumu yapılır.
 ```
 $ sudo apt-get update
 $ sudo apt-get install openvpn
 $ sudo mkdir /etc/openvpn
 $ sudo cd /etc/openvpn
-
+$ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf client.conf
 
 ```
 * Sertifika tabanlı yetkilendirme için client yapılandırma dosyasında düzenlenmesi gerekli parametreler şunlardır.
 ```
 Remote SERVER_IP 1194
-ca /etc/openvpn/ca.crt
-cert /etc/openvpn/testclient.crt
-key /etc/openvpn/testclient.key
+ca ca.crt
+cert testclient.crt
+key testclient.key
 ```
 
 Windows bir makineden bağlanılacak ise aşağıdaki web adresinden uygun olan client versiyonu indirilir ve kurulur.
 https://openvpn.net/index.php/open-source/downloads.html
 
-linux client ile devam edilir. Client makineye OpenVPN client kurulumu yapıldıktan sonra aşağıda belirttilen dizinden *"client.conf"* dosyası *"/etc/openvpn/"* dizinine kopyalanır.
+linux client ile devam edilir. Client makineye openvpn client kurulumu yapıldıktan sonra aşağıda belirttilen dizinden *"client.conf"* dosyası *"/etc/openvpn/"* dizinine kopyalanır.
 Ayrıca server üzerinde daha önceden "tar"lanıp oluşturulan *"clientsertifika.tar"* dosyasında bulunan sertifikalarda yine bu dizine *"/etc/openvpn"* çıkarılır. Bu işlemler aşağıda verilen komutların çalıştırılması ile gerçekleşir.
 ```
-$ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf client.conf
-$ sudo tar -cvf /etc/openvpn/clientsertifika.tar 
+sudo cd /usr/share/doc/openvpn/examples/sample-config-files
+sudo cp client.conf /etc/openvpn/.
 ```
 *"Client.conf"* dosyasını *"/etc/openvpn/"* dizinine kopyaladıktan sonra *client.conf* dosyasında bulunan aşağıda belirtilen alanların düzenlemesi gerekir.
 
 ```
-$ cd /etc/openvpn
-$ sudo nano client.conf
+cd /etc/openvpn
+sudo nano client.conf 
 ```
 ```
 client
@@ -355,14 +367,13 @@ ca /etc/openvpn/ca.crt
 cert /etc/openvpn/testclient.crt
 keys /etc/openvpn/testclient.crt
 ns-cert-type server
-comp-lzo 
+comp-lzo yes
 verb 3
 ```
 
-*client.conf* dosyası oluşturulduktan sonra OpenVPN servisleri her iki makinede de başlatılır ve OpenVPN sunucusuna bağlanılır. Aşağıdaki komutla vpn bağlantı gerçekleştirilir.
+*Client.conf* dosyası oluşturulduktan sonra openvpn sunucusuna bağlanılır. Aşağıdaki komutla vpn bağlantı gerçekleştirilir.
 ```
-$ sudo /etc/init.d/openvpn restart
-$ sudo openvpn /etc/openvpn/client.conf
+sudo openvpn /etc/openvpn/client.conf
 ```
 #Ağ Trafiğinin Yönlendirilmesi
 
@@ -374,7 +385,7 @@ Benzer bir parametrenin de server yapılandırma dosyasına  (*/etc/openvpn/ser
 ```
 push "redirect-gateway def1 bypass-dhcp"
 ```
-Bu şekilde client openvpn sunucusuna bağlandığında 10.8.0.0 ağına dahil olur ve clienttaki tüm trafik bu ağa yönlendirilir. Serverın fiziksel olarak bağlı olduğu ağdaki diğer makinelere bağlanmak için server üzerinde nat ayarları yapılmalı ve yapılandırma dosyasına aşağıdaki parametre eklenmelidir. Serverın 192.168.1.0 ağına bağlı olduğunu varsayarsak server yapılandırma dosyasına (*/etc/openvpn/server.conf*) şu parametre eklenmelidir.
+Bu şekilde client openvpn sunucusuna bağlandığında 10.8.0.0 ağına dahil olur ve clienttaki tüm trafik bu ağa yönlendirilir. Serverın fiziksel olarak bağlı olduğu ağdaki diğer makinelere bağlanmak için server üzerinde nat ayarları yapılmalı ve yapılandırma dosyasına aşağıdaki parametre eklenmelidir. Serverın 192.168.1.0 ağına bağlı olduğunu varsayarsak sunucu yapılandırma dosyasına (*/etc/openvpn/server.conf*) şu parametre eklenmelidir.
 ```
 push "route 192.168.1.0 255.255.255.0"
 ```
@@ -387,24 +398,24 @@ Modemlerde wan 1194 udp portuna gelen istekler içerideki VPN serverin statik ip
 
 Eğer router varsa ve Server üzerindeki nat ayarları için aşağıdaki komutlar uygulanmalıdır. Komutlar aynı zamanda /etc/rc.local dosyasına eklenirse makine yeniden başlatıldığında da nat ayarları etkinleştirilir.
 ```
-$ echo "1" > /proc/sys/net/ipv4/ip_forward
-$ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-$ iptables -A FORWARD -i eth0 -o tun0 -m state --state RELATED,ESTABLISHED -j ACCEPT iptables -A FORWARD -i tun0 -o eth0 -j ACCEPT
-$ iptables-save
-$ exit 0
+echo "1" > /proc/sys/net/ipv4/ip_forward 
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -i eth0 -o tun0 -m state --state RELATED,ESTABLISHED -j ACCEPT iptables -A FORWARD -i tun0 -o eth0 -j ACCEPT
+iptables-save 
+exit 0
 ```
 * Bu bölümde farklı iptables kuralları yazılabilir örneğin sadece aşağıdaki komutun uygulanması da yeterli olacaktır. VPN erişimi internet üzerindeki herhangi bir VPS sunucu ile gerçekleşiyorsa VPS'in IP adresine bağlı olarak şu şekilde nat yapılabilir.
 ```
-$ echo "1" > /proc/sys/net/ipv4/ip_forward 
-$ iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to-source VPS_IP_ADDRESS
-$ iptables-save 
-$ exit 0
+echo "1" > /proc/sys/net/ipv4/ip_forward 
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to-source VPS_IP_ADDRESS
+iptables-save 
+exit 0
 ```
 #Programın Çalıştırılması
 
 "server.conf" dosyasındaki alanları örnekteki gibi doldurduktan sonra openvpn servisi başlatılır. Bu işlem için aşağıdaki komut terminalde çalıştırılır.
 ```
-$ sudo service openvpn restart
+$sudo service openvpn restart
 Or 
 $ /etc/init.d/openvpn restart 
 ```
@@ -415,7 +426,7 @@ $ sudo /etc/init.d/openvpn stop
 ```
 Tekrar server etkin hale getirilir.
 ```
-$ sudo openvpn /etc/openvpn/server.conf 
+$sudo openvpn server.conf 
 ```
 
 Yukarıdaki komutu çalıştırdığımızda server ayarlamalarını yapar, gerekli dosyaları okur ve UDP 1194 potunu dinlemeye başlar. Çıktıları kontrol edilir. Eğer en sonda
@@ -428,7 +439,7 @@ verisi varsa işlem başarılı olmuş demektir. Eğer bu satırı görülmediys
 
 Client tarafında ayar dosyası çalıştırılır:
 ```
-$ sudo openvpn /etc/openvpn/client.conf 
+$sudo openvpn client.conf 
 ```
 
 Çıktılar arasında aşağıdaki satırlar varsa işlem başarılı ile tamamlanmış demektir.
@@ -454,7 +465,7 @@ bağlantı test edilebilir. Testin çalışabilmesi için serverın ping istekle
 
 #OpenVPN Sunucu Firewall ve Routing Konfigürasyonu 
 
-**Not:** OpenVPN sunucumuzda firewall çalışıyorsa aşağıdaki komut ile firewall'da 1194 numaralı port açılır.
+**Not:** Openvpn sunucumuzda firewall çalışıyorsa aşağıdaki komut ile firewall'da 1194 numaralı port açılır.
 ```
 $sudo ufw allow 1194
 $ufq status
@@ -462,7 +473,7 @@ $ufq status
 
 Firewall'dan 1194 porta izin verilirse, openvpn'nin *"tun0"* adaptörü ile fiziksel network adaptörü *"eth0"*'ın birbirleri ile haberleşmesini, yani NAT'lama yapılmasını gerektirir. Öncelikle *"sysctl.conf"* dosyasında *"net.ipv4.ip_forward=1"* tanımını kontrol etmeliyiz.
 ```
-$ sudo nano /etc/sysctl.conf
+$ sudo nano /etc/ sysctl.conf
 “net.ipv4.ip_forward=1” olmalı
 ```
 *"sysctl.conf"* dosyasında alanı kontrol ettikten sonra aşağıdaki komut ile *"10.8.0.0/24 subnetinden"* *"tun0"* dan gelen paketler fiziksel network cihazına *"eth0"*'a yönlenecektir. Yani *"Postrouting"* işlemi yapılır.
@@ -473,23 +484,18 @@ $ sudo /sbin/iptables –A FORWARD –i eth0 –o tun0 –m state --state RELATE
 
 $ sudo /sbin/iptables –A FORWARD –i tun0 –o eth0 –j ACCEPT
 ```
-***Not:***  Openvpn servisinin server başladığında otomatik çalışması için aşağıdaki komut kullanılmalıdır.
+***Not:***  Openvpn servisi server başladığında otomatik çalışması için aşağıdaki komut kullanılmalıdır.
 ```
 $ update-rc.d –f openvpn defaults 
 ```
+**Not:** Server_IP gördüğünüz yerlere kendi serverınızın ip adresini yazmaya dikkat edin.
+
 #KAYNAKLAR
-[1]  https://openvpn.net/index.php/open-source/documentation/howto.html
 
-[2]  https://openvpn.net/index.php/open-source/articles.html
+[1] http://www.olympos.org/howto-nasil/openvpn/openvpn-ile-vpn-uygulamalari-20220.html
 
-[3]  https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04
+[2] http://penguence.linux.org.tr/?~p=dergi&action=show&which=77
 
-[4]  http://fedoranews.org/contributors/florin_andrei/openvpn/
+[3] http://openvpn.net/index.php/documentation/howto.html
 
-[5]  http://www.olympos.org/howto-nasil/openvpn/openvpn-ile-vpn-uygulamalari-20220.html
-
-[6]  http://penguence.linux.org.tr/?~p=dergi&action=show&which=77
-
-[7]  http://openvpn.net/index.php/documentation/howto.html
-
-[8]. http://www.linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
+[4]. http://www.linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
