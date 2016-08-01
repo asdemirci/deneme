@@ -35,10 +35,10 @@ source vars
 sudo tar –cf clientsertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/testclient.crt /etc/openvpn/easy-rsa/keys/testclient.key
 sudo mv /etc/openvpn/easy-rsa/keys/testclient.crt etc/openvpn/easy-rsa/keys/testclient.crt_yedek
 sudo mv /etc/openvpn/easy-rsa/keys/testclient.key etc/openvpn/easy-rsa/keys/testclient.key_yedek
-sudo cd /usr/share/doc/openvpn/examples/sample-config-files
-sudo cp /server.conf.gz /etc/openvpn
+sudo cd /etc/openvpn
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn
 sudo gzip –d /etc/openvpn/server.conf.gz
-sudo cp /client.conf /etc/openvpn
 sudo cd /etc/openvpn
 sudo su
 nano /etc/openvpn/server.conf
