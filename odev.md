@@ -109,3 +109,53 @@ $ ./build-ca
 *build-ca* komutunu verdiğiniz zaman, vars dosyasında tanımladığımız değişkenlere uygun olarak ca anahtarları oluşturulacak ve çıktı aşağıdaki gibi olacaktır.
 
 **RESIM EKLE**
+
+#SUNUCU (Server) SERTİFİKASI HAZIRLAMA
+Sertifika otoritresini yapılandırdıktan sonra, OpenVPN sunucusuna ait anahtarları oluşturuyoruz.
+```
+$ ./build-key-server testserver
+```
+
+**Not:** * /build-key-server* komutunda kullandığımız testserver ismi, server.conf dosyasında server, cert ve key parametrelerini *testserver.crt* ve *testserver.key* olarak set ettiğimiz için girilmektedir. Dosyada bu parametreleri kendinize göre düzenlediyseniz, bu komutta verdiğiniz key ismi de aynı olmalıdır. Bu komutun çıktısı ise gene vars dosyasında belirtiğimiz değişkenlere uygun olarak aşağıdaki gibi olacaktır (en sonda sorulan iki soruya “y” olarak cevap vermeniz gerekmektedir.):
+*/etc/openvpn/easy-rsa/vars* dosyasına girdiğimiz "TR, Network Defense, TOBBETÜ"gibi alanları "Enter"la geçiyoruz.
+```
+“Sign the certificate? [y/n]” ve “1 out of certificate requests certified, commit? [y/n] alanlarına ise "y" yazarak cevaplamamız gerekmekte. 
+```
+
+Server sertifikaları oluştuğuna göre, aşağıdaki komutlarla oluşan sertifikaları */etc/openvpn/* patine taşımaya sıra geldi. Bu işlem için aşağıdaki komutları terminal konsolda çalıştırmalıyız.
+```
+$ cd keys/
+
+#$ openvpn --genkey --secret ta.key
+
+$ sudo  cp testserver.crt testserver.key ca.crt dh2048.pem  /etc/openvpn
+
+```
+Sonra, anahtar değiş tokuşu için kullanılacak Diffie Hellman dosyasını oluşturuyoruz.
+
+
+Vars dosyasını değiştirmediğimiz için anahtar dizini *~/easy-rsa/key* dizini olacaktır. Bundan sonra oluşturulacak anahtar ve sertifika dosyaları bu dizin altında bulunacaktır. *.key* uzantılı dosyalar gizli dosyalardır ve özel anahtarı içerirler. *.crt* uzantılı dosyalar ise dağıtılabilir.
+```
+$ ./build-dh
+```
+
+Verdiğimiz komutları açıklayayım:
+```
+1. Sertifikaları ve anahtarları oluşturmadan önce karşılıklı şifrelemenin gerçekleşebilmesi için bazı parametrelerin belirlenmesi gerekmektedir. Bu değişim parametreleri Diffie Hellman adı verilen teknik ile sağlanmaktadır.
+2. CA sertifikasını ve anahtarını oluşturur.
+3. Sunucu için gerekli sertifika/anahtar çiftini oluşturur. Sunucumuzun adı bundan sonra iyiSunucu olarak anılır.
+4. istemci1 istemcisi için gerekli sertifika/anahtar çiftini oluşturur.
+```
+
+Crt,key,pem dosyalarını "/etc/openvpn/" pathine kopyaladıktan sonra istemci client sertifikası hazırlamamız gerekmekte.
+
+
+Böylece, CA, sunucu ve istemci için sertifika/anahtarı oluşturmuş olduk. Bundan sonra her hangi bir istemci için sertifika/anahtar üretmek için:
+```
+$  source vars 
+
+$ ./build-key  testclient
+```
+
+komutlarını vermek yeterli olacaktır. Dikkat edilmesi gereken oluşturma işlemi sırasında keys dizini altında ca.keys ve ca.crt dosyalarının bulunmasıdır. Bütünlüğü bozmamak ve dosyaların taşınarak güvenliklerinin tehlikeye atılmaması için bütün oluşturma işlemlerinin tek bir bilgisayar üzerinde yapılması tavsiye edilir.
+
