@@ -159,3 +159,22 @@ $ ./build-key  testclient
 
 komutlarını vermek yeterli olacaktır. Dikkat edilmesi gereken oluşturma işlemi sırasında keys dizini altında ca.keys ve ca.crt dosyalarının bulunmasıdır. Bütünlüğü bozmamak ve dosyaların taşınarak güvenliklerinin tehlikeye atılmaması için bütün oluşturma işlemlerinin tek bir bilgisayar üzerinde yapılması tavsiye edilir.
 
+#İSTEMCİ (Client) SERTİFİKASI HAZIRLAMA
+Öncelikle sunucu üzerinde istemci için serticikaların oluşturulması gerekiyor.
+```
+$ cd /etc/openvpn/easy-rsa
+
+$ source vars 
+
+$ ./build-key  testclient
+```
+Bu komut ile yine “keys” klasörü içinde client.crt ve client.key isimli dosyalar oluşuyor. Bu iki dosyayı ve ilk başta oluşturduğumuz ca.crt dosyasını, uzak lokasyonda bulunan client pc’nin config klasörü içine kopyalamamız gerekiyor. Zip’leyip mail ile gönderebilirsiniz. Aynı yöntemle birden fazla değişik isimlerde client oluşturabilirsiniz bunu unutmayın.
+
+sertifika ile yetkilendirme yapılacaksa aşağıdaki dosyaların istemciye kopyalanması gerekmektedir.
+
+1. /etc/openvpn/ca.crt
+2. /etc/openvpn/easy-rsa/testserver.crt
+3. /etc/openvpn/easy-rsa/testserver.key
+
+İlk olarak dosyaları bir grup haline getirelim,bunun için tar komutu kullanılabilir *"tar –cf istemcisertifika.tar /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/ testclient.crt
+/etc/openvpn/easy-rsa/keys/ testclient.key”* .istemcisertifika.tar dosyasını sftp yada scp ile istemci makineye gönderebiliriz.
