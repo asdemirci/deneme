@@ -8,6 +8,30 @@ source vars
 ./build-ca
 ./build-key-server testserver
 ./build-dh
+sudo cd keys
+sudo cp testserver.crt testserver.key ca.crt dh2048.pem /etc/openvpn
+sudo cd ..
+source vars 
+./build-key testclient
+sudo cd ..
+sudo touch server.conf
+sudo vim server.conf
+  ca ca.crt
+  cert testserver.crt
+  key testserver.key
+  dh dh2048.pem
+  
+  server 10.8.0.0 255.255.255.0
+  push "route 10.6.11.1 255.255.255.0"
+  
+  push "dhcp option DOMAIN testserver.com"
+  push "dhcp-option DNS 10.6.11.4"
+  
+  keepalive 1 3
+  
+  log openvpn.log
+  comp.lzo
+  push "redirect-gateway def1 bypass-dhcp"
 
 
 
