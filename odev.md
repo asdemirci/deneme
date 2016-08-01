@@ -23,9 +23,9 @@ Kali üzerine OPENVPN’nin nasıl kurulduğu, kullanıcı ve sunucular için na
 $ sudo apt-get update
 $ sudo apt-get upgrade
 Not: Bundan sonra çalıştıracağımız tüm komutları root kullanıcısı olarak çalıştıralım.
-```
+
 2. OpenVPN yazılımının gerek duyduğu paketler aşağıdaki komut ile kurulur.
-```
+
 $ sudo apt-get install openvpn easy-rsa
 ```
 
