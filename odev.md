@@ -50,11 +50,38 @@ Sertifika oluşturmak için kullanılacak dosyaları */etc/openvpn* dizini altı
  
 Openvpn içerisinde sertifikaların kolaylıkla oluşturulabilmesi için bazı kodlar hazır olarak bulunmaktadır. Bu kodlar Ubuntu içerisinde */usr/share/doc/openvpn/examples/easy-rsa* ya *da/usr/share/easy-rsa/* *dizininde bulunurlar.
 
-3.
+*3.*
 ```
 $ sudo su
 
 $ mkdir /etc/openvpn/easy-rsa/
 
 $ sudo cp -R /usr/share/easy-rsa/* /etc/openvpn/easy-rsa
+```
+
+Root kullanıcısına geçilerek işlemler artık root yetkisi ile yapılır. */etc/openvpn/easy-rsa/* dizini oluşturulur ve */usr/share/easy-rsa/* dizininde bulunan içeriği oluşturduğumuz dizine kopyalarız. Dosyalar kopyalandıktan sonra easy-rsa dizinine gidiyoruz.
+Bu komutların çalışması esnasında aşağıdaki gibi hata alınırsa *easy-rsa* klasörünü içeren dosyalar sistemde bulunmamaktadır.
+
+*cannot stat `/usr/share/easy-rsa/`: No such file or directory*
+
+Böyle bir hata aldığınızda *easy-rsa* içeriklerini tekrardan indiriniz ve */etc/openvpn* klasörü altına kopyalayınız.
+
+*4.*
+```
+$ cd  ~/easy-rsa
+```
+Bu dizin altında bulunan vars dosyasını bir metin düzenleyici ile açarız ve aşağıda bulunan parametrelere gerekli değişiklikleri yaparız. Sadece dosyanın sonunda yer alan ön tanımlı değerleri değiştirmek yeterli olacaktır. Sertifika oluşumunda içerisine gömülecek verilerin hızlı bir şekilde oluşturulabilmesi için kullanılan değerlerdir. İsterseniz her sertifika için farklı değerlerde girebilirsiniz. Değişiklik işleminiz bittikten sonra sayfayı kaydedin.
+Aşağıda görülen */etc/openvpn/easy-rsa/vars* dosyasındaki sertifika için gerekli bilgiler, örnekteki gibi düzenlenmelidir.
+```
+$nano /etc/openvpn/easy-rsa/vars
+
+export KEY_COUNTRY=”TR”
+export KEY_PROVINCE=” Network Defense”
+export KEY_CITY=”ANKARA”
+export KEY_ORG=” TOBB ETU”
+export KEY_EMAIL=ayseselcuk77@gmail.com
+export KEY_CN=”NetworkDefense”
+#x509 Subject Field
+export KEY_NAME= NetworkDefense”
+export KEY_OU=”NetworkDefense”
 ```
