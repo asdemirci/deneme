@@ -492,10 +492,18 @@ $ update-rc.d –f openvpn defaults
 
 #KAYNAKLAR
 
-[1] http://www.olympos.org/howto-nasil/openvpn/openvpn-ile-vpn-uygulamalari-20220.html
+[1]  https://openvpn.net/index.php/open-source/documentation/howto.html
 
-[2] http://penguence.linux.org.tr/?~p=dergi&action=show&which=77
+[2]  https://openvpn.net/index.php/open-source/articles.html
 
-[3] http://openvpn.net/index.php/documentation/howto.html
+[3]  https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04
 
-[4]. http://www.linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
+[4]  http://www.olympos.org/howto-nasil/openvpn/openvpn-ile-vpn-uygulamalari-20220.html
+
+[5]  http://fedoranews.org/contributors/florin_andrei/openvpn/
+
+[6]  http://penguence.linux.org.tr/?~p=dergi&action=show&which=77
+
+[7]  http://openvpn.net/index.php/documentation/howto.html
+
+[8]. http://www.linuxakademi.org/2012/11/openvpn-sunucu-kurulumu-ve-istemci-yapilandirmasi.html
